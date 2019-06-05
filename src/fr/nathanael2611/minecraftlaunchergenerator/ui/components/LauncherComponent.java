@@ -22,16 +22,8 @@ public class LauncherComponent {
         return posX;
     }
 
-    public void setPosX(String posX) {
-        this.posX = posX;
-    }
-
     public String getPosY() {
         return posY;
-    }
-
-    public void setPosY(String posY) {
-        this.posY = posY;
     }
 
     public void setLPosition(String posX, String posY){
@@ -48,16 +40,8 @@ public class LauncherComponent {
         return widthX;
     }
 
-    public void setWidthX(String widthX) {
-        this.widthX = widthX;
-    }
-
     public String getHeightY() {
         return heightY;
-    }
-
-    public void setHeightY(String heightY) {
-        this.heightY = heightY;
     }
 
     public void setAutomaticBounds(){

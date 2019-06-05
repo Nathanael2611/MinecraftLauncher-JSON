@@ -4,7 +4,7 @@ import fr.nathanael2611.json.JSONArray;
 import fr.nathanael2611.json.JSONObject;
 import fr.nathanael2611.minecraftlaunchergenerator.ui.LauncherFrame;
 import fr.nathanael2611.minecraftlaunchergenerator.ui.components.LauncherComponent;
-import fr.nathanael2611.minecraftlaunchergenerator.ui.components.button.LauncherColoredButton;
+import fr.nathanael2611.minecraftlaunchergenerator.ui.components.button.*;
 import fr.nathanael2611.minecraftlaunchergenerator.util.Helpers;
 import fr.nathanael2611.nlib.NLib;
 
@@ -39,9 +39,6 @@ public class MinecraftLauncher {
 
 
     public static void main(String[] args) {
-
-
-
         new MinecraftLauncher("http://kyrgon.fr/nathanael2611/minecraftlaunchergenerator/test.json");
     }
 
@@ -114,6 +111,14 @@ public class MinecraftLauncher {
                                     Color.decode(component.getString("color-disabled"))
                             )
                     );
+                }else if(TYPE.equalsIgnoreCase("textured-button")){
+                    theComponent = new LauncherComponent(
+                            new LauncherTexturedButton(
+                                    Helpers.getImageFromLink(component.getString("texture")),
+                                    Helpers.getImageFromLink(component.getString("texture-hover")),
+                                    Helpers.getImageFromLink(component.getString("texture-disabled"))
+                            )
+                    );
                 }
                 JButton btn = (JButton)theComponent.COMPONENT;
                 if(!component.getBoolean("border"))btn.setBorder(null);
@@ -121,7 +126,26 @@ public class MinecraftLauncher {
                 btn.addActionListener(ActionHandler.createActionListenerByActionArray(
                         component.getJSONArray("actions")
                 ));
+            }else if(TYPE.contains("progress-bar")){
+                if(TYPE.equalsIgnoreCase("textured-progress-bar")){
+                    theComponent = new LauncherComponent(
+                            new LauncherTexturedProgressBar(
+                                    Helpers.getImageFromLink("empty-texture"),
+                                    Helpers.getImageFromLink("filled-texture")
+                            )
+                    );
+                }else if(TYPE.equalsIgnoreCase("colored-progress-bar")){
+                    theComponent = new LauncherComponent(
+                            new LauncherColoredProgressBar(
+                                    Color.decode(component.getString("empty-color")),
+                                    Color.decode(component.getString("filled-color"))
+                            )
+                    );
 
+                }
+                LauncherProgressBar progressBar = (LauncherProgressBar) theComponent.COMPONENT;
+                progressBar.setLevel(0);
+                progressBar.setMaxLevel(100);
             }
 
             theComponent.setLPosition(component.getString("x"), component.getString("y"));

@@ -31,22 +31,15 @@ public class LauncherColoredButton extends LauncherButton {
 
     @Override
     public void paintComponent(Graphics g){
-        super.paintComponent(g);
-
+        //super.paintComponent(g);
+        setOpaque(false);
+        setBackground(NLib.TRANSPARENT);
         Color buttonColor;
 
         if(isEnabled()){
-            if(isHover()){
-                buttonColor = this.colorHover;
-
-            }else{
-                buttonColor = this.color;
-            }
-
-        }else{
-            buttonColor = this.colorDisabled;
-        }
-
+            if(isHover())buttonColor = this.colorHover;
+            else buttonColor = this.color;
+        }else buttonColor = this.colorDisabled;
 
         NLib.fillColoredRect(g, this, buttonColor);
 

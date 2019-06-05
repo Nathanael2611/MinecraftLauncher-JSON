@@ -1,6 +1,8 @@
 package fr.nathanael2611.minecraftlaunchergenerator.ui.components.button;
 
 
+import fr.nathanael2611.nlib.NLib;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -31,22 +33,15 @@ public class LauncherTexturedButton extends LauncherButton {
 
     @Override
     public void paintComponent(Graphics g){
-        super.paintComponent(g);
-
+        //super.paintComponent(g);
+        setOpaque(false);
+        setBackground(NLib.TRANSPARENT);
         Image buttonTexture;
 
         if(isEnabled()){
-            if(isHover()){
-                buttonTexture = this.textureDisabled;
-
-            }else{
-                buttonTexture = this.texture;
-            }
-
-        }else{
-            buttonTexture = this.textureDisabled;
-        }
-
+            if(isHover())buttonTexture = this.textureHover;
+            else buttonTexture = this.texture;
+        }else buttonTexture = this.textureDisabled;
 
         g.drawImage(buttonTexture, 0, 0, getWidth(), getHeight(), this);
 

@@ -1,8 +1,11 @@
 package fr.nathanael2611.minecraftlaunchergenerator.util;
 
+import javax.imageio.ImageIO;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -46,6 +49,16 @@ public class Helpers {
         }
         System.err.println("Error while eval "+calc+" !!!! Return value will be 0.");
         return 0;
+    }
+
+    public static BufferedImage getImageFromLink(String link){
+        try {
+            return ImageIO.read(new URL(link));
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(0);
+        }
+        return null;
     }
 
 }
