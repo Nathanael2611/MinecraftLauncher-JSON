@@ -6,6 +6,7 @@ import fr.nathanael2611.nlib.NLib;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class LauncherPanel extends JPanel {
 

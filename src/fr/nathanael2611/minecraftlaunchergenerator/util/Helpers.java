@@ -61,4 +61,13 @@ public class Helpers {
         return null;
     }
 
+    public static BufferedImage screenshot(){
+        try {
+            return new Robot().createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
+        } catch (AWTException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }

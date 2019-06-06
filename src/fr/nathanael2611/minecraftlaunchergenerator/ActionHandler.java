@@ -2,7 +2,9 @@ package fr.nathanael2611.minecraftlaunchergenerator;
 
 import fr.nathanael2611.json.JSONArray;
 import fr.nathanael2611.json.JSONObject;
+import fr.nathanael2611.minecraftlaunchergenerator.ui.components.LauncherComponent;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -35,5 +37,36 @@ public class ActionHandler {
                 }
             }
         };
+    }
+
+    public static Font getFontFromJSON(JSONObject fontObj){
+        if(fontObj == null){
+            return new Font("Sans Serif", Font.PLAIN, 20);
+        }
+        int fontType = Font.PLAIN;
+        if(fontObj.getString("type").equalsIgnoreCase("italic")){
+            fontType = Font.ITALIC;
+        }else if(fontObj.getString("type").equalsIgnoreCase("bold")){
+            fontType = Font.BOLD;
+        }
+        return new Font(
+                fontObj.getString("name"),
+                fontType,
+                fontObj.getInt("size")
+        );
+    }
+
+    public static void initTextFieldFromJSON(LauncherComponent field, JSONObject options){
+        field.setLPosition(
+                options.getString("x"),
+                options.getString("y")
+        );
+        field.setLSize(
+                options.getString("width"),
+                options.getString("height")
+        );
+        field.COMPONENT.setFont(
+                ActionHandler.getFontFromJSON(options.getJSONObject("font"))
+        );
     }
 }

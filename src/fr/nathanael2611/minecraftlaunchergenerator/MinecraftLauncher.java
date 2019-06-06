@@ -153,6 +153,32 @@ public class MinecraftLauncher {
             COMPONENT_LIST.add(theComponent);
         }
 
+        //ALL TEXTFIELDS ;)
+        {
+            JSONObject confidentialityOptions = infos.getJSONObject("confidentiality-options");
+            {
+                JSONObject usernameFieldOptions   = confidentialityOptions.getJSONObject("username-field");
+                LauncherComponent usernameField = new LauncherComponent(
+                        new JTextField()
+                );
+                ActionHandler.initTextFieldFromJSON(
+                        usernameField, usernameFieldOptions
+                );
+                COMPONENT_LIST.add(usernameField);
+            }
+            {
+                JSONObject passwordFieldOptions   = confidentialityOptions.getJSONObject("password-field");
+                LauncherComponent passwordField = new LauncherComponent(
+                        new JPasswordField()
+                );
+                ActionHandler.initTextFieldFromJSON(
+                        passwordField, passwordFieldOptions
+                );
+                COMPONENT_LIST.add(passwordField);
+            }
+
+        }
+
         frame = new LauncherFrame();
 
     }
