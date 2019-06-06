@@ -558,7 +558,7 @@ public class JSONObject {
      */
     public Object get(String key) throws JSONException {
         if (key == null) {
-            throw new JSONException("Null key.");
+            return "null key";
         }
         Object object = this.opt(key);
         if (object == null) {
@@ -604,8 +604,11 @@ public class JSONObject {
      *             if the value is not a Boolean or the String "true" or
      *             "false".
      */
-    public boolean getBoolean(String key) throws JSONException {
+    public boolean getBoolean(String key) {
         Object object = this.get(key);
+        if(object == null){
+            return false;
+        }
         if (object.equals(Boolean.FALSE)
                 || (object instanceof String && ((String) object)
                         .equalsIgnoreCase("false"))) {

@@ -3,15 +3,12 @@ package fr.nathanael2611.minecraftlaunchergenerator;
 import fr.nathanael2611.json.JSONArray;
 import fr.nathanael2611.json.JSONObject;
 import fr.nathanael2611.minecraftlaunchergenerator.ui.components.LauncherComponent;
+import fr.nathanael2611.minecraftlaunchergenerator.util.Helpers;
+import fr.nathanael2611.nlib.NLib;
 
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
 
 public class ActionHandler {
     public static ActionListener createActionListenerByActionArray(JSONArray actions){
@@ -65,8 +62,16 @@ public class ActionHandler {
                 options.getString("width"),
                 options.getString("height")
         );
+        if(options.getBoolean("transparent")){
+            field.COMPONENT.setOpaque(false);
+            field.COMPONENT.setBackground(NLib.TRANSPARENT);
+            field.COMPONENT.setBorder(null);
+        }
         field.COMPONENT.setFont(
                 ActionHandler.getFontFromJSON(options.getJSONObject("font"))
+        );
+        field.COMPONENT.setForeground(
+                Helpers.parseColor(options.getString("text-color"))
         );
     }
 }

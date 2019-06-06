@@ -4,12 +4,15 @@ import fr.nathanael2611.json.JSONArray;
 import fr.nathanael2611.json.JSONObject;
 import fr.nathanael2611.minecraftlaunchergenerator.ui.LauncherFrame;
 import fr.nathanael2611.minecraftlaunchergenerator.ui.components.LauncherComponent;
+import fr.nathanael2611.minecraftlaunchergenerator.ui.components.LauncherImage;
+import fr.nathanael2611.minecraftlaunchergenerator.ui.components.LauncherLabel;
 import fr.nathanael2611.minecraftlaunchergenerator.ui.components.button.*;
 import fr.nathanael2611.minecraftlaunchergenerator.util.Helpers;
 import fr.nathanael2611.nlib.NLib;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
@@ -39,6 +42,11 @@ public class MinecraftLauncher {
 
 
     public static void main(String[] args) {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         new MinecraftLauncher("http://kyrgon.fr/nathanael2611/minecraftlaunchergenerator/test.json");
     }
 
@@ -146,10 +154,39 @@ public class MinecraftLauncher {
                 LauncherProgressBar progressBar = (LauncherProgressBar) theComponent.COMPONENT;
                 progressBar.setLevel(0);
                 progressBar.setMaxLevel(100);
+            }else if(TYPE.equalsIgnoreCase("image")){
+                try {
+                    theComponent = new LauncherComponent(
+                            new LauncherImage(
+                                    ImageIO.read(new URL(component.getString("link")))
+                            )
+                    );
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }else if(TYPE.equalsIgnoreCase("label")){
+                theComponent = new LauncherComponent(
+                        /*new LauncherLabel(
+                                component.getString("text"),
+                                false
+                                //component.getBoolean("centered")
+                        )*/
+                        new JLabel("100")
+                );
+                theComponent.COMPONENT.setOpaque(true);
+                ((JLabel)theComponent.COMPONENT).setText("AAS");
+                ((JLabel)theComponent.COMPONENT).setBorder(new BevelBorder(BevelBorder.RAISED));
+                theComponent.COMPONENT.setBackground(NLib.TRANSPARENT);
             }
 
             theComponent.setLPosition(component.getString("x"), component.getString("y"));
             theComponent.setLSize(component.getString("width"), component.getString("height"));
+            theComponent.COMPONENT.setFont(
+                    ActionHandler.getFontFromJSON(component.getJSONObject("font"))
+            );
+            theComponent.COMPONENT.setForeground(
+                Helpers.parseColor(component.getString("text-color"))
+            );
             COMPONENT_LIST.add(theComponent);
         }
 
@@ -176,11 +213,7 @@ public class MinecraftLauncher {
                 );
                 COMPONENT_LIST.add(passwordField);
             }
-
         }
-
         frame = new LauncherFrame();
-
     }
-
 }

@@ -1,5 +1,7 @@
 package fr.nathanael2611.minecraftlaunchergenerator.util;
 
+import fr.nathanael2611.nlib.NLib;
+
 import javax.imageio.ImageIO;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
@@ -68,6 +70,14 @@ public class Helpers {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static Color parseColor(String color){
+        if(color.equalsIgnoreCase("notfound"))return Color.BLACK;
+        if(color.equalsIgnoreCase("transparent")){
+            return NLib.TRANSPARENT;
+        }
+        return Color.decode(color);
     }
 
 }
