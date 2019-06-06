@@ -72,5 +72,6 @@ public class LauncherComponent {
                 Helpers.stringToInteger(width),
                 Helpers.stringToInteger(height)
         );
+
     }
 }
