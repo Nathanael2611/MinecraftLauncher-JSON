@@ -11,10 +11,10 @@ public class LauncherFrame extends JFrame{
     public LauncherFrame(){
         //Define the launcher-title
         setTitle(MinecraftLauncher.launcher_name);
-
         //Define the launcher size
         setSize(MinecraftLauncher.base_width, MinecraftLauncher.base_height);
         setResizable(MinecraftLauncher.isResizable);
+        setLocationRelativeTo(null);
 
         //Define the launcher-panel with all components
         JPanel panel = new LauncherPanel();
@@ -33,7 +33,7 @@ public class LauncherFrame extends JFrame{
         /* Define if the frame is decorated */
         setUndecorated(MinecraftLauncher.undecorated);
 
-        if(MinecraftLauncher.background_color == NLib.TRANSPARENT){
+        if(MinecraftLauncher.background_color == NLib.TRANSPARENT || MinecraftLauncher.background_type.equalsIgnoreCase("image")){
             setBackground(NLib.TRANSPARENT);
         }
 

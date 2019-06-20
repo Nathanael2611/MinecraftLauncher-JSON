@@ -2,23 +2,32 @@ package fr.nathanael2611.minecraftlaunchergenerator;
 
 import fr.nathanael2611.json.JSONArray;
 import fr.nathanael2611.json.JSONObject;
+import fr.nathanael2611.minecraftlaunchergenerator.launch.minecraft.AuthInfos;
+import fr.nathanael2611.minecraftlaunchergenerator.launch.minecraft.GameInfos;
+import fr.nathanael2611.minecraftlaunchergenerator.launch.minecraft.GameTweak;
+import fr.nathanael2611.minecraftlaunchergenerator.launch.minecraft.GameVersion;
 import fr.nathanael2611.minecraftlaunchergenerator.ui.LauncherFrame;
 import fr.nathanael2611.minecraftlaunchergenerator.ui.components.LauncherComponent;
 import fr.nathanael2611.minecraftlaunchergenerator.ui.components.LauncherImage;
-import fr.nathanael2611.minecraftlaunchergenerator.ui.components.LauncherLabel;
 import fr.nathanael2611.minecraftlaunchergenerator.ui.components.button.*;
 import fr.nathanael2611.minecraftlaunchergenerator.util.Helpers;
 import fr.nathanael2611.nlib.NLib;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.border.BevelBorder;
 import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 
 public class MinecraftLauncher {
+
+    public static GameVersion launcherVersion;
+    public static GameInfos   launcherInfos;
+    public static File        launcherDir;
+    public static File        userInfos;
+    public static AuthInfos authInfos;
 
     public static String launcher_name;
 
@@ -63,9 +72,19 @@ public class MinecraftLauncher {
             return;
         }
 
+
+
         launcher_name = infos.getString("launcher-name");
         has_mover     = infos.getBoolean("has-window-mover");
         undecorated   = infos.getBoolean("undecorated");
+
+        JSONObject launchInfos = infos.getJSONObject("launch");
+        {
+            launcherVersion = ConfigManager.parseGameVersion(infos.getString("minecraft-version"));
+            launcherInfos = new GameInfos(infos.getString("launcher-name"), launcherVersion, new GameTweak[] {GameTweak.FORGE});
+            launcherDir     = launcherInfos.getGameDir();
+            userInfos       = new File(launcherDir, "infos.json");
+        }
 
         {
             //SIZE
@@ -164,19 +183,6 @@ public class MinecraftLauncher {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            }else if(TYPE.equalsIgnoreCase("label")){
-                theComponent = new LauncherComponent(
-                        /*new LauncherLabel(
-                                component.getString("text"),
-                                false
-                                //component.getBoolean("centered")
-                        )*/
-                        new JLabel("100")
-                );
-                theComponent.COMPONENT.setOpaque(true);
-                ((JLabel)theComponent.COMPONENT).setText("AAS");
-                ((JLabel)theComponent.COMPONENT).setBorder(new BevelBorder(BevelBorder.RAISED));
-                theComponent.COMPONENT.setBackground(NLib.TRANSPARENT);
             }
 
             theComponent.setLPosition(component.getString("x"), component.getString("y"));
@@ -214,6 +220,7 @@ public class MinecraftLauncher {
                 COMPONENT_LIST.add(passwordField);
             }
         }
+        UserInfos.setupUserInfoFile();
         frame = new LauncherFrame();
     }
 }

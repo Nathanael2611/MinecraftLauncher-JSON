@@ -11,8 +11,8 @@ public class LauncherButton extends JButton implements MouseListener {
         addMouseListener(this);
     }
 
-    Color textColor = null;
-    String text;
+    private Color textColor = null;
+    private String text;
 
 
     @Override
@@ -35,9 +35,8 @@ public class LauncherButton extends JButton implements MouseListener {
         return textColor;
     }
 
-    boolean hover;
-    boolean clicked;
-
+    private boolean hover;
+    private boolean clicked;
 
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -54,16 +53,12 @@ public class LauncherButton extends JButton implements MouseListener {
     }
 
     @Override
-    public void mouseReleased(MouseEvent e) {
-
-    }
+    public void mouseReleased(MouseEvent e) {}
 
     @Override
     public void mouseEntered(MouseEvent e) {
         hover = true;
-
         repaint();
-
     }
 
     @Override

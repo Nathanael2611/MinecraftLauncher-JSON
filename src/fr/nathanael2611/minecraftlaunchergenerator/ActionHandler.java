@@ -2,10 +2,12 @@ package fr.nathanael2611.minecraftlaunchergenerator;
 
 import fr.nathanael2611.json.JSONArray;
 import fr.nathanael2611.json.JSONObject;
+import fr.nathanael2611.minecraftlaunchergenerator.ui.RamSelector;
 import fr.nathanael2611.minecraftlaunchergenerator.ui.components.LauncherComponent;
 import fr.nathanael2611.minecraftlaunchergenerator.util.Helpers;
 import fr.nathanael2611.nlib.NLib;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.net.URI;
@@ -31,6 +33,14 @@ public class ActionHandler {
                     }else if(TYPE.equalsIgnoreCase("close")){
                         System.exit(0);
                     }
+                }else if(ACTION.equalsIgnoreCase("ram-selector")){
+                    final String RAMS = action.getString("rams");
+                    String[]  stringRams = RAMS.split(",");
+                    Integer[] intRams = new Integer[RAMS.length()];
+                    for(int index = 0; index < stringRams.length; index++){
+                        intRams[index] = Integer.parseInt(stringRams[index]);
+                    }
+                    RamSelector.showRamSelector(intRams);
                 }
             }
         };
@@ -72,6 +82,9 @@ public class ActionHandler {
         );
         field.COMPONENT.setForeground(
                 Helpers.parseColor(options.getString("text-color"))
+        );
+        ((JTextField)field.COMPONENT).setCaretColor(
+                Helpers.parseColor(options.getString("caret-color"))
         );
     }
 }

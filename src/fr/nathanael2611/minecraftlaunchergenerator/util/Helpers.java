@@ -8,16 +8,37 @@ import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.Charset;
 
+/**
+ * This class contain a lot of useful things
+ */
 public class Helpers {
 
+    /**
+     * Useful for read the content of a file.
+     */
+    public static String readFileToString(File file) {
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            StringBuilder stringBuilder = new StringBuilder();
+            String line = null;
+            String ls = System.getProperty("line.separator");
+            while ((line = reader.readLine()) != null) {
+                stringBuilder.append(line);
+                stringBuilder.append(ls);
+            }
+            stringBuilder.deleteCharAt(stringBuilder.length() - 1);
+            reader.close();
+            return stringBuilder.toString();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return "ERROR";
+    }
 
     public static String readJsonFromUrl(String url) throws IOException, IOException {
         URL urlObject;
@@ -63,14 +84,6 @@ public class Helpers {
         return null;
     }
 
-    public static BufferedImage screenshot(){
-        try {
-            return new Robot().createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
-        } catch (AWTException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
 
     public static Color parseColor(String color){
         if(color.equalsIgnoreCase("notfound"))return Color.BLACK;

@@ -6,7 +6,6 @@ import fr.nathanael2611.nlib.NLib;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 public class LauncherPanel extends JPanel {
 
@@ -14,10 +13,12 @@ public class LauncherPanel extends JPanel {
         setLayout(null);
 
         /* Set the opacity to 0 if the background is transparent */
-        if(MinecraftLauncher.background_color == NLib.TRANSPARENT){
+        if(MinecraftLauncher.background_color == NLib.TRANSPARENT || MinecraftLauncher.background_type.equalsIgnoreCase("image")){
             setOpaque(false);
         }
-
+        /*
+         * Add the component to panel.
+         */
         for(LauncherComponent component : MinecraftLauncher.COMPONENT_LIST){
             add(component.COMPONENT);
 
