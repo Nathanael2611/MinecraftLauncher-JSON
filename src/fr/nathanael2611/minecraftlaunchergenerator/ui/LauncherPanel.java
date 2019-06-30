@@ -1,7 +1,10 @@
 package fr.nathanael2611.minecraftlaunchergenerator.ui;
 
+import fr.nathanael2611.json.JSONArray;
+import fr.nathanael2611.minecraftlaunchergenerator.ActionHandler;
 import fr.nathanael2611.minecraftlaunchergenerator.MinecraftLauncher;
 import fr.nathanael2611.minecraftlaunchergenerator.ui.components.LauncherComponent;
+import fr.nathanael2611.minecraftlaunchergenerator.ui.components.button.LauncherButton;
 import fr.nathanael2611.nlib.NLib;
 
 import javax.swing.*;
@@ -49,6 +52,19 @@ public class LauncherPanel extends JPanel {
 
         for(LauncherComponent component : MinecraftLauncher.COMPONENT_LIST){
             component.setAutomaticBounds();
+        }
+    }
+
+    public static void enableAll(boolean enabled){
+        for(LauncherComponent component : MinecraftLauncher.COMPONENT_LIST){
+            if(component.COMPONENT instanceof JTextField){
+                component.COMPONENT.setEnabled(enabled);
+            }
+            if(component.COMPONENT instanceof LauncherButton){
+                if(component.actionListener.contains("launch")){
+                    component.COMPONENT.setEnabled(enabled);
+                }
+            }
         }
     }
 }

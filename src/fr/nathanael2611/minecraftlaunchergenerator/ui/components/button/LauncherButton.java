@@ -11,8 +11,10 @@ public class LauncherButton extends JButton implements MouseListener {
         addMouseListener(this);
     }
 
+
     private Color textColor = null;
     private String text;
+
 
 
     @Override

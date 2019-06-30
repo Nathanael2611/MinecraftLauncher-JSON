@@ -2,6 +2,8 @@ package fr.nathanael2611.minecraftlaunchergenerator;
 
 import fr.nathanael2611.json.JSONArray;
 import fr.nathanael2611.json.JSONObject;
+import fr.nathanael2611.minecraftlaunchergenerator.auth.AuthenticationException;
+import fr.nathanael2611.minecraftlaunchergenerator.ui.LauncherPanel;
 import fr.nathanael2611.minecraftlaunchergenerator.ui.RamSelector;
 import fr.nathanael2611.minecraftlaunchergenerator.ui.components.LauncherComponent;
 import fr.nathanael2611.minecraftlaunchergenerator.util.Helpers;
@@ -41,6 +43,15 @@ public class ActionHandler {
                         intRams[index] = Integer.parseInt(stringRams[index]);
                     }
                     RamSelector.showRamSelector(intRams);
+                }else if(ACTION.equalsIgnoreCase("launch")){
+                    LauncherPanel.enableAll(false);
+                    try {
+                        MinecraftLauncher.processAuthentification();
+                        JOptionPane.showMessageDialog(null, "Bien ! :D");
+                    } catch (AuthenticationException ex) {
+                        ex.printStackTrace();
+                        JOptionPane.showMessageDialog(null, ex.getErrorModel().getErrorMessage());
+                    }
                 }
             }
         };

@@ -3,8 +3,18 @@ package fr.nathanael2611.minecraftlaunchergenerator.ui.components;
 import fr.nathanael2611.minecraftlaunchergenerator.util.Helpers;
 
 import javax.swing.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class LauncherComponent {
+
+    public List<String> actionListener = new ArrayList<>();
+
+    public void addAction(String action){
+        actionListener.add(action);
+    }
+
 
     String posX = "0";
     String posY = "0";
