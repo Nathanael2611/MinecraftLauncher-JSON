@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="MinecraftLauncherGenerator:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/MinecraftLauncherGenerator_jar</output-path>
+  <artifact type="jar" name="MinecraftLauncherJSON:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/MinecraftLauncherJSON_jar</output-path>
     <root id="archive" name="MinecraftLauncherGenerator.jar">
       <element id="module-output" name="MinecraftLauncherGenerator" />
       <element id="extracted-dir" path="$PROJECT_DIR$/Lib/commons-io-2.6.jar" path-in-jar="/" />

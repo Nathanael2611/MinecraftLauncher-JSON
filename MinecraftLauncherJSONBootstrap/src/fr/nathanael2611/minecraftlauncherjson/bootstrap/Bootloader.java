@@ -78,7 +78,7 @@ public class Bootloader extends JPanel {
         System.out.println("[MinecraftLauncher-JSON] Getting the last version...");
         try (
                 BufferedInputStream bis = new BufferedInputStream(new URL(
-                        "https://github.com/Nathanael2611/MinecraftLauncher-JSON/raw/master/latest/MinecraftLauncherGenerator.jar"
+                        "https://github.com/Nathanael2611/MinecraftLauncher-JSON/raw/master/latest/MinecraftLauncherJSON.jar"
                 ).openStream()
         );
              FileOutputStream fos = new FileOutputStream(
