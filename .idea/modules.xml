@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/MinecraftLauncherGenerator.iml" filepath="$PROJECT_DIR$/MinecraftLauncherGenerator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MinecraftLauncherJSONBootstrap/MinecraftLauncherJSONBootstrap.iml" filepath="$PROJECT_DIR$/MinecraftLauncherJSONBootstrap/MinecraftLauncherJSONBootstrap.iml" />
     </modules>
   </component>
 </project>
