@@ -75,7 +75,7 @@ public class Bootloader extends JPanel {
      * Download the launcher and it dependencies
      */
     public static void update() {
-        System.out.println("[MinecraftLauncher-JSON] Getting the last version...");
+        System.out.println("[MinecraftLauncher-JSON] Getting the last version from github...");
         try (
                 BufferedInputStream bis = new BufferedInputStream(new URL(
                         "https://github.com/Nathanael2611/MinecraftLauncher-JSON/raw/master/latest/MinecraftLauncherJSON.jar"
