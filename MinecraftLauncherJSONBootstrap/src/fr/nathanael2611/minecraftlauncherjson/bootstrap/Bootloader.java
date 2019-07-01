@@ -60,9 +60,11 @@ public class Bootloader extends JPanel {
     public static void launch() {
         System.out.println("[MinecraftLauncher-JSON] Launching...");
 
+        String command = " java -jar " + new File(MINECRAFLAUNCHERJSON_DIR, "/MinecraftLauncherJSON.jar").getAbsolutePath() + " " + updateLink;
+        System.out.println(command);
         try {
             Runtime.getRuntime().exec(
-                    "java -jar " + new File(MINECRAFLAUNCHERJSON_DIR, "/MinecraftLauncherJSON.jar") + " " + updateLink
+                    command
             );
         } catch (IOException e) {
             e.printStackTrace();
