@@ -22,7 +22,7 @@ package fr.nathanael2611.minecraftlauncherjson.launch.internal;
  * The Class Initializer
  *
  * <p>
- *     Object used to init the main class
+ * Object used to init the main class
  * </p>
  *
  * @author Litarvan
@@ -31,15 +31,12 @@ package fr.nathanael2611.minecraftlauncherjson.launch.internal;
  * @deprecated
  */
 @Deprecated
-public interface ClassInitializer
-{
+public interface ClassInitializer {
     /**
      * Init the main class
      *
      * @param toInit The class to init
-     *
      * @return The initialized class
-     *
      * @throws IllegalAccessException If it thrown one
      * @throws InstantiationException If it thrown one
      */

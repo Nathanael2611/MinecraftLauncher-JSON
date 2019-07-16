@@ -26,7 +26,7 @@ import fr.nathanael2611.minecraftlauncherjson.launch.LaunchException;
  * The Classpath Exception
  *
  * <p>
- *     An exception thrown when the Classpath fails somewhere
+ * An exception thrown when the Classpath fails somewhere
  * </p>
  *
  * @author Litarvan
@@ -35,8 +35,7 @@ import fr.nathanael2611.minecraftlauncherjson.launch.LaunchException;
  * @deprecated
  */
 @Deprecated
-public class ClasspathException extends LaunchException
-{
+public class ClasspathException extends LaunchException {
     /**
      * When a JAR is not found
      */
@@ -53,8 +52,7 @@ public class ClasspathException extends LaunchException
      * @param type The type of exception (need to be ClasspathException.JAR_NOT_FOUND_ERROR or JAR_LOADING_ERROR)
      * @param str  The message
      */
-    public ClasspathException(int type, String str)
-    {
+    public ClasspathException(int type, String str) {
         super(type == JAR_NOT_FOUND_ERROR ? LanguageManager.lang("jar-notfound", ":", str) + str : (type == JAR_LOADING_ERROR ? LanguageManager.lang("load-fail", ":", str) : str));
     }
 
@@ -65,8 +63,7 @@ public class ClasspathException extends LaunchException
      * @param str  The message
      * @param t    The cause
      */
-    public ClasspathException(int type, String str, Throwable t)
-    {
+    public ClasspathException(int type, String str, Throwable t) {
         super(type == JAR_NOT_FOUND_ERROR ? LanguageManager.lang("jar-notfound", ":", str) + str : (type == JAR_LOADING_ERROR ? LanguageManager.lang("load-fail", ":", str) : str), t);
     }
 

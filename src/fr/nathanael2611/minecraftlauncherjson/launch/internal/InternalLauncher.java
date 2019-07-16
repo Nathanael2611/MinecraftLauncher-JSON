@@ -31,10 +31,10 @@ import java.util.Arrays;
  * The Internal Launcher
  *
  * <p>
- *     Launcher that directly add the jars to the current one, and then
- *     manually launch the needed class.
- *
- *     A lot faster than the external launching.
+ * Launcher that directly add the jars to the current one, and then
+ * manually launch the needed class.
+ * <p>
+ * A lot faster than the external launching.
  * </p>
  *
  * @author Litarvan
@@ -43,8 +43,7 @@ import java.util.Arrays;
  * @deprecated Use {@link ExternalLauncher} instead, this one isn't compatible with Java 9
  */
 @Deprecated
-public class InternalLauncher implements ClassInitializer
-{
+public class InternalLauncher implements ClassInitializer {
     /**
      * The launch profile (contains all the launch informations)
      *
@@ -63,11 +62,9 @@ public class InternalLauncher implements ClassInitializer
      * The Internal Launcher
      *
      * @param profile The launch profile (contains the launching informations)
-     *
      * @see InternalLaunchProfile
      */
-    public InternalLauncher(InternalLaunchProfile profile)
-    {
+    public InternalLauncher(InternalLaunchProfile profile) {
         this(profile, null);
     }
 
@@ -77,8 +74,7 @@ public class InternalLauncher implements ClassInitializer
      * @param profile     The launch profile (contains the launching informations)
      * @param initializer The Class Initializer (optional, initialize the main class)
      */
-    public InternalLauncher(InternalLaunchProfile profile, ClassInitializer initializer)
-    {
+    public InternalLauncher(InternalLaunchProfile profile, ClassInitializer initializer) {
         this.profile = profile;
         this.initializer = initializer != null ? initializer : this;
     }
@@ -87,11 +83,9 @@ public class InternalLauncher implements ClassInitializer
      * Launch !
      *
      * @return The object returned by the launched method
-     *
      * @throws LaunchException If something failed
      */
-    public Object launch() throws LaunchException
-    {
+    public Object launch() throws LaunchException {
         System.err.println("##########################################################");
         System.err.println("  WARNING : Internal Launching doesn't work with Java 9");
         System.err.println("  --> YOU SHOULD USE EXTERNAL LAUNCHING INSTEAD");
@@ -100,18 +94,14 @@ public class InternalLauncher implements ClassInitializer
         long start = System.currentTimeMillis();
 
         if (profile.getClasspath() != null)
-            for (File f : profile.getClasspath())
-            {
+            for (File f : profile.getClasspath()) {
                 JarLoader.addToClasspath(f);
             }
 
         Class<?> theClass;
-        try
-        {
+        try {
             theClass = ClassLoader.getSystemClassLoader().loadClass(profile.getTargetClass());
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
 
             return null;
         }
@@ -119,33 +109,26 @@ public class InternalLauncher implements ClassInitializer
 
         Method[] methods;
         Method method = null;
-        try
-        {
+        try {
             methods = theClass.getDeclaredMethods();
             for (Method m : methods)
-                if (m.getName().equals(profile.getTargetMethod()) && Arrays.equals(m.getParameterTypes(), profile.getParametersTypes()))
-                {
+                if (m.getName().equals(profile.getTargetMethod()) && Arrays.equals(m.getParameterTypes(), profile.getParametersTypes())) {
                     method = m;
                     break;
                 }
 
             if (method == null)
                 throw new UnknownMethodException(profile.getTargetMethod());
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             throw e instanceof UnknownMethodException ? (UnknownMethodException) e : new UnknownMethodException(profile.getTargetMethod(), e);
         }
 
 
         Object initClass = null;
         if (!Modifier.isStatic(method.getModifiers()))
-            try
-            {
+            try {
                 initClass = initializer.init(theClass);
-            }
-            catch (Throwable t)
-            {
+            } catch (Throwable t) {
                 throw new LaunchException("Can't initialize the main class", t);
             }
 
@@ -157,22 +140,16 @@ public class InternalLauncher implements ClassInitializer
         int hours = (int) ((totalTime / (1000 * 60 * 60)) % 24);
         String strTime = hours + " hours " + minutes + " minutes " + seconds + " seconds and " + totalTime % 1000 + " milliseconds.";
 
-        try
-        {
+        try {
             return method.invoke(initClass, profile.getParameters());
-        }
-        catch (InvocationTargetException e)
-        {
+        } catch (InvocationTargetException e) {
             Throwable thrown = e.getTargetException();
-            if (thrown instanceof ExceptionInInitializerError)
-            {
+            if (thrown instanceof ExceptionInInitializerError) {
                 ExceptionInInitializerError initError = (ExceptionInInitializerError) thrown;
                 thrown = initError.getException();
             }
             throw new LaunchException("Invoked method returned an exception", thrown);
-        }
-        catch (IllegalAccessException e)
-        {
+        } catch (IllegalAccessException e) {
             throw new LaunchException("This is not supposed to happen", e);
         }
     }
@@ -181,11 +158,9 @@ public class InternalLauncher implements ClassInitializer
      * Return the given launch profile (contains all the launching informations)
      *
      * @return The launch profile
-     *
      * @see InternalLaunchProfile
      */
-    public InternalLaunchProfile getProfile()
-    {
+    public InternalLaunchProfile getProfile() {
         return profile;
     }
 
@@ -193,11 +168,9 @@ public class InternalLauncher implements ClassInitializer
      * Set the launch profile (contains all the launching informations)
      *
      * @param profile The new launch profile
-     *
      * @see InternalLaunchProfile
      */
-    public void setProfile(InternalLaunchProfile profile)
-    {
+    public void setProfile(InternalLaunchProfile profile) {
         this.profile = profile;
     }
 
@@ -205,11 +178,9 @@ public class InternalLauncher implements ClassInitializer
      * Return the given class initializer (can be null)
      *
      * @return The class initializer
-     *
      * @see InternalLaunchProfile
      */
-    public ClassInitializer getInitializer()
-    {
+    public ClassInitializer getInitializer() {
         return initializer;
     }
 
@@ -217,17 +188,14 @@ public class InternalLauncher implements ClassInitializer
      * Set the class initializer (can be null, initialize the main class)
      *
      * @param initializer The new initializer
-     *
      * @see ClassInitializer
      */
-    public void setInitializer(ClassInitializer initializer)
-    {
+    public void setInitializer(ClassInitializer initializer) {
         this.initializer = initializer;
     }
 
     @Override
-    public Object init(Class<?> toInit) throws IllegalAccessException, InstantiationException
-    {
+    public Object init(Class<?> toInit) throws IllegalAccessException, InstantiationException {
         return toInit.newInstance();
     }
 }

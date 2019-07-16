@@ -7,21 +7,21 @@ public class LauncherTexturedCheckBox extends LauncherCheckBox {
     Image unCheckedTexture;
     Image checkedTexture;
 
-    public LauncherTexturedCheckBox(Image unCheckedTexture, Image checkedTexture){
+    public LauncherTexturedCheckBox(Image unCheckedTexture, Image checkedTexture) {
         this.unCheckedTexture = unCheckedTexture;
         this.checkedTexture = checkedTexture;
     }
 
 
     @Override
-    public void paintComponent(Graphics g){
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
         Image texture = null;
 
-        if(isChecked){
+        if (isChecked) {
             texture = checkedTexture;
-        }else{
+        } else {
             texture = unCheckedTexture;
         }
 

@@ -35,52 +35,30 @@ import java.util.ArrayList;
 
 public class MinecraftLauncher {
 
+    public static final ArrayList<LauncherComponent> COMPONENT_LIST = new ArrayList<>();
     public static GameVersion launcherVersion;
-    public static GameInfos   launcherInfos;
-    public static File        launcherDir;
-    public static File        userInfos;
-    public static AuthInfos   authInfos;
-
+    public static GameInfos launcherInfos;
+    public static File launcherDir;
+    public static File userInfos;
+    public static AuthInfos authInfos;
     public static String launcher_name;
-
-    public static int     base_width;
-    public static int     base_height;
+    public static int base_width;
+    public static int base_height;
     public static boolean isResizable;
-
     public static String background_type;
     public static String background_value;
-    public static  Color background_color;
-    public static  Image background_image;
-
-    public static  Image icon;
-
-    public static boolean has_mover   = false;
+    public static Color background_color;
+    public static Image background_image;
+    public static Image icon;
+    public static boolean has_mover = false;
     public static boolean undecorated = false;
-
-
-    public static final ArrayList<LauncherComponent> COMPONENT_LIST = new ArrayList<>();
-
-    public static String  updateURL    = "";
+    public static String updateURL = "";
     public static boolean useCustomJRE = false;
-    public static boolean urlRedirect  = false;
-
-
-    public static void main(String[] args) {
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        if(args.length == 1) {
-            new MinecraftLauncher(args[0]);
-        }else{
-            JOptionPane.showMessageDialog(null, "Veuillez lancer MinecraftLauncher.JSON avec le lien du JSON de configuration de votre launcher en argument.");
-        }
-    }
-
+    public static boolean urlRedirect = false;
     public static JFrame frame;
+    public static Thread updateThread;
 
-    public MinecraftLauncher(String URL){
+    public MinecraftLauncher(String URL) {
         JSONObject infos;
 
         try {
@@ -92,30 +70,29 @@ public class MinecraftLauncher {
         }
 
 
-
         launcher_name = infos.getString("launcher-name");
-        has_mover     = infos.getBoolean("has-window-mover");
-        undecorated   = infos.getBoolean("undecorated");
+        has_mover = infos.getBoolean("has-window-mover");
+        undecorated = infos.getBoolean("undecorated");
 
         JSONObject launchInfos = infos.getJSONObject("launch");
         {
-            updateURL    = launchInfos.getString("s-update-server");
+            updateURL = launchInfos.getString("s-update-server");
             useCustomJRE = launchInfos.getBoolean("use-custom-jre");
-            urlRedirect  = launchInfos.getBoolean("url-rewrite");
+            urlRedirect = launchInfos.getBoolean("url-rewrite");
 
         }
 
         {
             launcherVersion = ConfigManager.parseGameVersion(infos.getString("minecraft-version"));
-            launcherInfos   = new GameInfos(infos.getString("launcher-name"), launcherVersion, new GameTweak[] {GameTweak.FORGE});
-            launcherDir     = launcherInfos.getGameDir();
-            userInfos       = new File(launcherDir, "infos.json");
+            launcherInfos = new GameInfos(infos.getString("launcher-name"), launcherVersion, new GameTweak[]{GameTweak.FORGE});
+            launcherDir = launcherInfos.getGameDir();
+            userInfos = new File(launcherDir, "infos.json");
         }
 
         {
             //SIZE
             JSONObject sizeInfos = infos.getJSONObject("base-size");
-            base_width  = sizeInfos.getInt("width");
+            base_width = sizeInfos.getInt("width");
             base_height = sizeInfos.getInt("height");
             isResizable = sizeInfos.getBoolean("resizable");
         }
@@ -128,35 +105,35 @@ public class MinecraftLauncher {
         {
             //BACKGROUND
             JSONObject backgroundInfos = infos.getJSONObject("background");
-            background_type            = backgroundInfos.getString("type");
-            background_value           = backgroundInfos.getString("value");
-            if(background_type.equalsIgnoreCase("image")){
+            background_type = backgroundInfos.getString("type");
+            background_value = backgroundInfos.getString("value");
+            if (background_type.equalsIgnoreCase("image")) {
                 try {
                     background_image = ImageIO.read(new URL(background_value));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            }else{
-                if(background_value.equalsIgnoreCase("transparent")){
+            } else {
+                if (background_value.equalsIgnoreCase("transparent")) {
                     background_color = NLib.TRANSPARENT;
-                }else {
+                } else {
                     background_color = Color.decode(background_value);
                 }
             }
         }
 
         JSONArray components = infos.getJSONArray("components");
-        for(int i = 0; i < components.length(); i++){
+        for (int i = 0; i < components.length(); i++) {
             JSONObject component = components.getJSONObject(i);
             LauncherComponent theComponent = null;
             final String TYPE = component.getString("type");
 
-            if(TYPE.contains("button")){
-                if(TYPE.equalsIgnoreCase("button")){
+            if (TYPE.contains("button")) {
+                if (TYPE.equalsIgnoreCase("button")) {
                     theComponent = new LauncherComponent(
                             new JButton()
                     );
-                }else if(TYPE.equalsIgnoreCase("colored-button")){
+                } else if (TYPE.equalsIgnoreCase("colored-button")) {
                     theComponent = new LauncherComponent(
                             new LauncherColoredButton(
                                     Color.decode(component.getString("color")),
@@ -164,7 +141,7 @@ public class MinecraftLauncher {
                                     Color.decode(component.getString("color-disabled"))
                             )
                     );
-                }else if(TYPE.equalsIgnoreCase("textured-button")){
+                } else if (TYPE.equalsIgnoreCase("textured-button")) {
                     theComponent = new LauncherComponent(
                             new LauncherTexturedButton(
                                     Helpers.getImageFromLink(component.getString("texture")),
@@ -173,25 +150,25 @@ public class MinecraftLauncher {
                             )
                     );
                 }
-                JButton btn = (JButton)theComponent.COMPONENT;
-                if(!component.getBoolean("border"))btn.setBorder(null);
+                JButton btn = (JButton) theComponent.COMPONENT;
+                if (!component.getBoolean("border")) btn.setBorder(null);
                 btn.setText(component.getString("text"));
                 btn.addActionListener(ActionHandler.createActionListenerByActionArray(
                         component.getJSONArray("actions")
                 ));
-                for(int ii = 0; ii< component.getJSONArray("actions").length(); ii++){
+                for (int ii = 0; ii < component.getJSONArray("actions").length(); ii++) {
                     JSONObject act = component.getJSONArray("actions").getJSONObject(ii);
                     theComponent.addAction(act.getString("type"));
                 }
-            }else if(TYPE.contains("progress-bar")){
-                if(TYPE.equalsIgnoreCase("textured-progress-bar")){
+            } else if (TYPE.contains("progress-bar")) {
+                if (TYPE.equalsIgnoreCase("textured-progress-bar")) {
                     theComponent = new LauncherComponent(
                             new LauncherTexturedProgressBar(
                                     Helpers.getImageFromLink("empty-texture"),
                                     Helpers.getImageFromLink("filled-texture")
                             )
                     );
-                }else if(TYPE.equalsIgnoreCase("colored-progress-bar")){
+                } else if (TYPE.equalsIgnoreCase("colored-progress-bar")) {
                     theComponent = new LauncherComponent(
                             new LauncherColoredProgressBar(
                                     Color.decode(component.getString("empty-color")),
@@ -203,7 +180,7 @@ public class MinecraftLauncher {
                 LauncherProgressBar progressBar = (LauncherProgressBar) theComponent.COMPONENT;
                 progressBar.setLevel(0);
                 progressBar.setMaxLevel(100);
-            }else if(TYPE.equalsIgnoreCase("image")){
+            } else if (TYPE.equalsIgnoreCase("image")) {
                 try {
                     theComponent = new LauncherComponent(
                             new LauncherImage(
@@ -221,7 +198,7 @@ public class MinecraftLauncher {
                     ActionHandler.getFontFromJSON(component.getJSONObject("font"))
             );
             theComponent.COMPONENT.setForeground(
-                Helpers.parseColor(component.getString("text-color"))
+                    Helpers.parseColor(component.getString("text-color"))
             );
             COMPONENT_LIST.add(theComponent);
         }
@@ -230,7 +207,7 @@ public class MinecraftLauncher {
         {
             JSONObject confidentialityOptions = infos.getJSONObject("confidentiality-options");
             {
-                JSONObject usernameFieldOptions   = confidentialityOptions.getJSONObject("username-field");
+                JSONObject usernameFieldOptions = confidentialityOptions.getJSONObject("username-field");
                 LauncherComponent usernameField = new LauncherComponent(
                         new JTextField()
                 );
@@ -241,14 +218,16 @@ public class MinecraftLauncher {
                 COMPONENT_LIST.add(usernameField);
             }
             {
-                JSONObject passwordFieldOptions   = confidentialityOptions.getJSONObject("password-field");
-                LauncherComponent passwordField = new LauncherComponent(
-                        new JPasswordField()
-                );
-                ActionHandler.initTextFieldFromJSON(
-                        passwordField, passwordFieldOptions
-                );
-                COMPONENT_LIST.add(passwordField);
+                if (confidentialityOptions.getJSONObject("password-field") != null) {
+                    JSONObject passwordFieldOptions = confidentialityOptions.getJSONObject("password-field");
+                    LauncherComponent passwordField = new LauncherComponent(
+                            new JPasswordField()
+                    );
+                    ActionHandler.initTextFieldFromJSON(
+                            passwordField, passwordFieldOptions
+                    );
+                    COMPONENT_LIST.add(passwordField);
+                }
             }
         }
         UserInfos.setupUserInfoFile();
@@ -256,48 +235,63 @@ public class MinecraftLauncher {
         System.out.println(urlRedirect);
     }
 
+    public static void main(String[] args) {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (args.length == 1) {
+            new MinecraftLauncher(args[0]);
+        } else {
+            JOptionPane.showMessageDialog(null, "Veuillez lancer MinecraftLauncher.JSON avec le lien du JSON de configuration de votre launcher en argument.");
+        }
+    }
+
     public static void processAuthentification() throws AuthenticationException {
         Authenticator authenticator = new Authenticator(Authenticator.MOJANG_AUTH_URL, AuthPoints.NORMAL_AUTH_POINTS);
         AuthResponse response = null;
         String username = "";
         String password = "";
-        for(LauncherComponent component : MinecraftLauncher.COMPONENT_LIST){
-            if(component.COMPONENT instanceof JTextField && username.equalsIgnoreCase("")){
+        boolean crack = true;
+        for (LauncherComponent component : MinecraftLauncher.COMPONENT_LIST) {
+            if (component.COMPONENT instanceof JTextField && username.equalsIgnoreCase("")) {
                 username = ((JTextField) component.COMPONENT).getText();
             }
-            if(component.COMPONENT instanceof JPasswordField && password.equalsIgnoreCase("")){
+            if (component.COMPONENT instanceof JPasswordField && password.equalsIgnoreCase("")) {
+                crack = false;
                 password = ((JPasswordField) component.COMPONENT).getText();
             }
         }
-        response = authenticator.authenticate(AuthAgent.MINECRAFT, username, password, "");
-        MinecraftLauncher.authInfos = new AuthInfos(response.getSelectedProfile().getName(), response.getAccessToken(), response.getSelectedProfile().getId());
 
+        if (!crack) {
+            response = authenticator.authenticate(AuthAgent.MINECRAFT, username, password, "");
+            MinecraftLauncher.authInfos = new AuthInfos(response.getSelectedProfile().getName(), response.getAccessToken(), response.getSelectedProfile().getId());
+            updateThread.interrupt();
+        } else {
+            MinecraftLauncher.authInfos = new AuthInfos(username, "sry", "nope");
+        }
     }
 
-    public static Thread updateThread;
     public static void processUpdate() throws BadServerResponseException, IOException, BadServerVersionException, ServerDisabledException, ServerMissingSomethingException {
 
         SUpdate su = new SUpdate(updateURL, launcherDir);
         su.addApplication(new FileDeleter());
         su.getServerRequester().setRewriteEnabled(urlRedirect);
         System.out.println(urlRedirect);
-        updateThread = new Thread()
-        {
+        updateThread = new Thread() {
             private int val;
             private int max;
 
 
-            public void run()
-            {
-                while (!isInterrupted())
-                {
-                    this.val = ((int)(BarAPI.getNumberOfTotalDownloadedBytes() / 1000L));
-                    this.max = ((int)(BarAPI.getNumberOfTotalBytesToDownload() / 1000L));
+            public void run() {
+                while (!isInterrupted()) {
+                    this.val = ((int) (BarAPI.getNumberOfTotalDownloadedBytes() / 1000L));
+                    this.max = ((int) (BarAPI.getNumberOfTotalBytesToDownload() / 1000L));
 
-                    if(val != 0 && max != 0){
-                        for(LauncherComponent component : COMPONENT_LIST)
-                        {
-                            if(component.COMPONENT instanceof LauncherProgressBar){
+                    if (val != 0 && max != 0) {
+                        for (LauncherComponent component : COMPONENT_LIST) {
+                            if (component.COMPONENT instanceof LauncherProgressBar) {
                                 LauncherProgressBar bar = (LauncherProgressBar) component.COMPONENT;
                                 bar.setLevel(this.val);
                                 bar.setMaxLevel(this.max);

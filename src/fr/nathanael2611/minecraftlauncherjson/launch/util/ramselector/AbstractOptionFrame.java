@@ -18,21 +18,20 @@
  */
 package fr.nathanael2611.minecraftlauncherjson.launch.util.ramselector;
 
-import javax.swing.JFrame;
+import javax.swing.*;
 
 /**
  * The Abstract Option Frame
  *
  * <p>
- *     The base class to use with the Ram Selector to select RAM.
+ * The base class to use with the Ram Selector to select RAM.
  * </p>
  *
  * @author Litarvan
  * @version 3.0.2-BETA
  * @since 3.0.0-BETA
  */
-public abstract class AbstractOptionFrame extends JFrame
-{
+public abstract class AbstractOptionFrame extends JFrame {
     /**
      * The current RAM Selector
      */
@@ -43,8 +42,7 @@ public abstract class AbstractOptionFrame extends JFrame
      *
      * @param selector The current RAM Selector
      */
-    public AbstractOptionFrame(RamSelector selector)
-    {
+    public AbstractOptionFrame(RamSelector selector) {
         this.selector = selector;
     }
 
@@ -53,8 +51,7 @@ public abstract class AbstractOptionFrame extends JFrame
      *
      * @return The current RAM selector
      */
-    public RamSelector getSelector()
-    {
+    public RamSelector getSelector() {
         return selector;
     }
 
@@ -62,7 +59,6 @@ public abstract class AbstractOptionFrame extends JFrame
      * Return the selected RAM (as index of RamSelector.RAM_ARRAY)
      *
      * @return The selected RAM index
-     *
      * @see #setSelectedIndex(int)
      */
     public abstract int getSelectedIndex();
@@ -71,7 +67,6 @@ public abstract class AbstractOptionFrame extends JFrame
      * Set the selected RAM (as index of RamSelector.RAM_ARRAY)
      *
      * @param index The selected RAM index
-     *
      * @see #getSelectedIndex()
      */
     public abstract void setSelectedIndex(int index);

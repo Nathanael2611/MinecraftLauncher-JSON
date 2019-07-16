@@ -22,22 +22,20 @@ package fr.nathanael2611.minecraftlauncherjson.launch;
  * The Launch Exception
  *
  * <p>
- *     An exception thrown when launching.
+ * An exception thrown when launching.
  * </p>
  *
  * @author Litarvan
  * @version 3.0.2-BETA
  * @since 3.0.0-BETA
  */
-public class LaunchException extends Exception
-{
+public class LaunchException extends Exception {
     /**
      * Normal constructor
      *
      * @param message The message
      */
-    public LaunchException(String message)
-    {
+    public LaunchException(String message) {
         super(message);
     }
 
@@ -47,8 +45,7 @@ public class LaunchException extends Exception
      * @param message The message
      * @param cause   The cause
      */
-    public LaunchException(String message, Throwable cause)
-    {
+    public LaunchException(String message, Throwable cause) {
         super(message, cause);
     }
 }

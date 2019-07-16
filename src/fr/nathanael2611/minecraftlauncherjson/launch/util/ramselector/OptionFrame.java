@@ -20,22 +20,20 @@ package fr.nathanael2611.minecraftlauncherjson.launch.util.ramselector;
 
 import fr.nathanael2611.minecraftlauncherjson.launch.LanguageManager;
 
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
+import javax.swing.*;
 
 /**
  * The default Option Frame
  *
  * <p>
- *     The default Option Frame for the Ram Selector
+ * The default Option Frame for the Ram Selector
  * </p>
  *
  * @author Litarvan
  * @version 3.0.2-BETA
  * @since 3.0.0-BETA
  */
-public class OptionFrame extends AbstractOptionFrame
-{
+public class OptionFrame extends AbstractOptionFrame {
     /**
      * The Label "RAM : "
      */
@@ -52,8 +50,7 @@ public class OptionFrame extends AbstractOptionFrame
      * @param selector The current Ram Selector
      */
     @SuppressWarnings("unchecked")
-    public OptionFrame(RamSelector selector)
-    {
+    public OptionFrame(RamSelector selector) {
         super(selector);
 
         this.setTitle(LanguageManager.lang("options"));
@@ -72,14 +69,12 @@ public class OptionFrame extends AbstractOptionFrame
     }
 
     @Override
-    public int getSelectedIndex()
-    {
+    public int getSelectedIndex() {
         return ramBox.getSelectedIndex();
     }
 
     @Override
-    public void setSelectedIndex(int index)
-    {
+    public void setSelectedIndex(int index) {
         ramBox.setSelectedIndex(index);
     }
 }

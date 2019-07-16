@@ -21,12 +21,12 @@
  * The Internal Launching Method
  *
  * <p>
- *     Launch a program by adding the jars to the current classpath and
- *     then launching manually a method of the target class.
- *
- *     A lot faster than the external method.
+ * Launch a program by adding the jars to the current classpath and
+ * then launching manually a method of the target class.
+ * <p>
+ * A lot faster than the external method.
  * </p>
- *
+ * <p>
  * Code example :
  *
  * <pre>{@code
@@ -34,7 +34,7 @@
  *     InternalLaunchProfile profile = new InternalLaunchProfile("fr.theshark34.MyMainClass", classpath);
  *     profile.launch();
  * }</pre>
- *
+ * <p>
  * This will launch the main(String[] args) of the given class.
  * You can also choose the method to launch, and its parameters.
  * And, you can receive what it returned.

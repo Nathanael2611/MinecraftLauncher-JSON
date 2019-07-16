@@ -18,12 +18,12 @@
  */
 package fr.nathanael2611.minecraftlauncherjson.launch.minecraft;
 
-import fr.nathanael2611.minecraftlauncherjson.launch.external.ExternalLaunchProfile;
-import fr.nathanael2611.minecraftlauncherjson.launch.util.explorer.Explorer;
 import fr.nathanael2611.minecraftlauncherjson.launch.JavaUtil;
 import fr.nathanael2611.minecraftlauncherjson.launch.LaunchException;
 import fr.nathanael2611.minecraftlauncherjson.launch.external.ClasspathConstructor;
+import fr.nathanael2611.minecraftlauncherjson.launch.external.ExternalLaunchProfile;
 import fr.nathanael2611.minecraftlauncherjson.launch.internal.InternalLaunchProfile;
+import fr.nathanael2611.minecraftlauncherjson.launch.util.explorer.Explorer;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -33,31 +33,26 @@ import java.util.List;
  * The Minecraft Launcher
  *
  * <p>
- *     Contains some methods to create internal/external launch profile for Minecraft.
+ * Contains some methods to create internal/external launch profile for Minecraft.
  * </p>
  *
  * @author Litarvan
  * @version 3.0.4-BETA
  * @since 3.0.0-BETA
  */
-public class MinecraftLauncher
-{
+public class MinecraftLauncher {
     /**
      * Generate an Internal Launch Profile for Minecraft
      *
      * @param infos     The GameInfos (contains your game infos)
      * @param folder    The GameFolder (contains your game folder organization)
      * @param authInfos The AuthInfos (contains the user infos)
-     *
      * @return The generated profile
-     *
      * @throws LaunchException If it failed
-     *
      * @deprecated Use {@link #createExternalProfile(GameInfos, GameFolder, AuthInfos)} instead
      */
     @Deprecated
-    public static InternalLaunchProfile createInternalProfile(GameInfos infos, GameFolder folder, AuthInfos authInfos) throws LaunchException
-    {
+    public static InternalLaunchProfile createInternalProfile(GameInfos infos, GameFolder folder, AuthInfos authInfos) throws LaunchException {
 
         checkFolder(folder, infos.getGameDir());
 
@@ -66,9 +61,8 @@ public class MinecraftLauncher
 
         List<String> arguments = infos.getGameVersion().getGameType().getLaunchArgs(infos, folder, authInfos);
 
-        if(infos.getGameTweaks() != null)
-            for (GameTweak tweak : infos.getGameTweaks())
-            {
+        if (infos.getGameTweaks() != null)
+            for (GameTweak tweak : infos.getGameTweaks()) {
                 arguments.add("--tweakClass");
                 arguments.add(tweak.getTweakClass(infos));
             }
@@ -81,12 +75,9 @@ public class MinecraftLauncher
 
         System.setProperty("fml.ignoreInvalidMinecraftCertificates", "true");
 
-        try
-        {
+        try {
             JavaUtil.setLibraryPath(new File(infos.getGameDir(), folder.getNativesFolder()).getAbsolutePath());
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             throw new LaunchException("Can't register the natives", e);
         }
 
@@ -100,16 +91,12 @@ public class MinecraftLauncher
      * @param infos     The GameInfos (contains your game infos)
      * @param folder    The GameFolder (contains your game folder organization)
      * @param authInfos The AuthInfos (contains the user infos)
-     *
      * @return The generated profile
-     *
      * @throws LaunchException If it failed
      */
-    public static ExternalLaunchProfile createExternalProfile(GameInfos infos, GameFolder folder, AuthInfos authInfos) throws LaunchException
-    {
+    public static ExternalLaunchProfile createExternalProfile(GameInfos infos, GameFolder folder, AuthInfos authInfos) throws LaunchException {
 
-        if (authInfos == null)
-        {
+        if (authInfos == null) {
             throw new IllegalArgumentException("authInfos == null");
         }
 
@@ -128,12 +115,11 @@ public class MinecraftLauncher
         vmArgs.add("-Dfml.ignoreInvalidMinecraftCertificates=true");
         vmArgs.add("-Dfml.ignorePatchDiscrepancies=true");
 
-        if(infos.getGameTweaks() != null)
-			for (GameTweak tweak : infos.getGameTweaks())
-			{
-				args.add("--tweakClass");
-				args.add(tweak.getTweakClass(infos));
-			}
+        if (infos.getGameTweaks() != null)
+            for (GameTweak tweak : infos.getGameTweaks()) {
+                args.add("--tweakClass");
+                args.add(tweak.getTweakClass(infos));
+            }
 
         ExternalLaunchProfile profile = new ExternalLaunchProfile(mainClass, classpath, vmArgs, args, true, infos.getServerName(), infos.getGameDir());
 
@@ -146,11 +132,9 @@ public class MinecraftLauncher
      *
      * @param folder    The folder organization
      * @param directory The directory to check
-     *
      * @throws FolderException If it failed
      */
-    public static void checkFolder(GameFolder folder, File directory) throws FolderException
-    {
+    public static void checkFolder(GameFolder folder, File directory) throws FolderException {
         File assetsFolder = new File(directory, folder.getAssetsFolder());
         File libsFolder = new File(directory, folder.getLibsFolder());
         File nativesFolder = new File(directory, folder.getNativesFolder());

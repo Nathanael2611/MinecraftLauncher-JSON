@@ -6,10 +6,12 @@ import java.awt.*;
 public class LauncherLabel extends JComponent {
     private String text;
     private boolean centered;
-    public LauncherLabel(){
+
+    public LauncherLabel() {
         this("", false);
     }
-    public LauncherLabel(String text, boolean centered){
+
+    public LauncherLabel(String text, boolean centered) {
         this.text = text;
     }
 
@@ -30,11 +32,11 @@ public class LauncherLabel extends JComponent {
                     g,
             );
         }else{*/
-            g.drawString(
-                    this.text,
-                    getX(),
-                    getY()
-            );
+        g.drawString(
+                this.text,
+                getX(),
+                getY()
+        );
         /*}*/
     }
 }

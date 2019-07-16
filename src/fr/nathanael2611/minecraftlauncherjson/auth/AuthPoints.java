@@ -35,16 +35,11 @@ public class AuthPoints {
     /**
      * AuthPoints constructor
      *
-     * @param authenticatePoint
-     *            Authenticate point
-     * @param refreshPoint
-     *            Refresh point
-     * @param validatePoint
-     *            Validate point
-     * @param signoutPoint
-     *            Signout point
-     * @param invalidatePoint
-     *            Invalidate point
+     * @param authenticatePoint Authenticate point
+     * @param refreshPoint      Refresh point
+     * @param validatePoint     Validate point
+     * @param signoutPoint      Signout point
+     * @param invalidatePoint   Invalidate point
      */
     public AuthPoints(String authenticatePoint, String refreshPoint, String validatePoint, String signoutPoint, String invalidatePoint) {
         this.authenticatePoint = authenticatePoint;

@@ -24,7 +24,7 @@ import fr.nathanael2611.minecraftlauncherjson.launch.LaunchException;
  * The Unknown Main Class Exception
  *
  * <p>
- *     Thrown when the main class is not found
+ * Thrown when the main class is not found
  * </p>
  *
  * @author Litarvan
@@ -33,16 +33,14 @@ import fr.nathanael2611.minecraftlauncherjson.launch.LaunchException;
  * @deprecated
  */
 @Deprecated
-public class UnknownMainClassException extends LaunchException
-{
+public class UnknownMainClassException extends LaunchException {
     /**
      * The Unknown main class exception
      *
      * @param message The message
      * @param t       The cause
      */
-    public UnknownMainClassException(String message, Throwable t)
-    {
+    public UnknownMainClassException(String message, Throwable t) {
         super(message, t);
     }
 }

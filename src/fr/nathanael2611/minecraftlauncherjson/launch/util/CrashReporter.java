@@ -18,27 +18,26 @@
  */
 package fr.nathanael2611.minecraftlauncherjson.launch.util;
 
+import javax.swing.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import javax.swing.JOptionPane;
 
 /**
  * The Crash Reporter
  *
  * <p>
- *     The Crash Reporter can catch errors and save them as a crash report.
+ * The Crash Reporter can catch errors and save them as a crash report.
  * </p>
  *
  * @author Litarvan
  * @version 3.0.2-BETA
  * @since 3.0.0-BETA
  */
-public class CrashReporter
-{
+public class CrashReporter {
 
     /**
      * The directory to write the crashes
@@ -54,12 +53,46 @@ public class CrashReporter
      * Basic constructor
      *
      * @param name The project name
-     * @param dir The directory to write the crashes
+     * @param dir  The directory to write the crashes
      */
-    public CrashReporter(String name, File dir)
-    {
+    public CrashReporter(String name, File dir) {
         this.name = name;
         this.dir = dir;
+    }
+
+    /**
+     * Create a crash report with an exception
+     *
+     * @param e           The exception to make the crash report
+     * @param projectName The name of your project
+     * @return The made crash report
+     */
+    public static String makeCrashReport(String projectName, Exception e) {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+
+        String report = "# " + projectName + " Crash Report\n\r" +
+                "#\n\r" +
+                "# At : " + dateFormat.format(date) + "\n\r" +
+                "#\n\r" +
+                "# Exception : " + e.getClass().getSimpleName() + "\n\r";
+
+        report += "\n\r# " + e.toString();
+
+        StackTraceElement[] stackTrace = e.getStackTrace();
+        for (StackTraceElement element : stackTrace)
+            report += "\n\r#     " + element;
+
+        Throwable cause = e.getCause();
+        if (cause != null) {
+            report += "\n\r# Caused by: " + cause.toString();
+
+            StackTraceElement[] causeStackTrace = cause.getStackTrace();
+            for (StackTraceElement element : causeStackTrace)
+                report += "\n\r#     " + element;
+        }
+
+        return report;
     }
 
     /**
@@ -68,20 +101,16 @@ public class CrashReporter
      * @param e       The error to catch
      * @param message The error message
      */
-    public void catchError(Exception e, String message)
-    {
+    public void catchError(Exception e, String message) {
 
         System.out.println(makeCrashReport(name, e));
 
         String msg;
 
-        try
-        {
+        try {
             File report = writeError(e);
             msg = "\nThe crash report is in : " + report.getAbsolutePath() + "";
-        }
-        catch (IOException e2)
-        {
+        } catch (IOException e2) {
             e.printStackTrace();
             msg = "\nAnd unable to write the crash report :( : " + e2;
         }
@@ -95,13 +124,10 @@ public class CrashReporter
      * Write a stacktrace to a file
      *
      * @param e The exception
-     *
      * @return The file where the crash was saved
-     *
      * @throws IOException If it failed to write the crash
      */
-    public File writeError(Exception e) throws IOException
-    {
+    public File writeError(Exception e) throws IOException {
         File file;
         int number = 0;
         while ((file = new File(dir, "crash-" + number + ".txt")).exists())
@@ -121,75 +147,37 @@ public class CrashReporter
 
     /**
      * Return the crash directory
+     *
      * @return The crash dir
      */
-    public File getDir()
-    {
+    public File getDir() {
         return dir;
     }
 
     /**
      * Set the directory where are the crashes
+     *
      * @param dir The crash dir
      */
-    public void setDir(File dir)
-    {
+    public void setDir(File dir) {
         this.dir = dir;
     }
 
     /**
      * Return the reporter name
+     *
      * @return The name
      */
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
     /**
      * Set the reporter name
+     *
      * @param name The new name
      */
-    public void setName(String name)
-    {
+    public void setName(String name) {
         this.name = name;
-    }
-
-    /**
-     * Create a crash report with an exception
-     *
-     * @param e           The exception to make the crash report
-     * @param projectName The name of your project
-     *
-     * @return The made crash report
-     */
-    public static String makeCrashReport(String projectName, Exception e)
-    {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        Date date = new Date();
-
-        String report = "# " + projectName + " Crash Report\n\r" +
-                        "#\n\r" +
-                        "# At : " + dateFormat.format(date) + "\n\r" +
-                        "#\n\r" +
-                        "# Exception : " + e.getClass().getSimpleName() + "\n\r";
-
-        report += "\n\r# " + e.toString();
-
-        StackTraceElement[] stackTrace = e.getStackTrace();
-        for (StackTraceElement element : stackTrace)
-            report += "\n\r#     " + element;
-
-        Throwable cause = e.getCause();
-        if (cause != null)
-        {
-            report += "\n\r# Caused by: " + cause.toString();
-
-            StackTraceElement[] causeStackTrace = cause.getStackTrace();
-            for (StackTraceElement element : causeStackTrace)
-                report += "\n\r#     " + element;
-        }
-
-        return report;
     }
 }

@@ -3,10 +3,10 @@ package fr.nathanael2611.minecraftlauncherjson.ui.components.button;
 
 import fr.nathanael2611.nlib.NLib;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import static fr.nathanael2611.nlib.NLib.*;
+
+import static fr.nathanael2611.nlib.NLib.drawCenteredString;
 
 public class LauncherTexturedButton extends LauncherButton {
 
@@ -14,17 +14,19 @@ public class LauncherTexturedButton extends LauncherButton {
     BufferedImage textureHover;
     BufferedImage textureDisabled;
 
-    public LauncherTexturedButton(BufferedImage texture){
+    public LauncherTexturedButton(BufferedImage texture) {
         this.texture = texture;
         this.textureHover = texture;
         this.textureDisabled = texture;
     }
-    public LauncherTexturedButton(BufferedImage texture, BufferedImage textureHover){
+
+    public LauncherTexturedButton(BufferedImage texture, BufferedImage textureHover) {
         this.texture = texture;
         this.textureHover = textureHover;
         this.textureDisabled = textureHover;
     }
-    public LauncherTexturedButton(BufferedImage texture, BufferedImage textureHover, BufferedImage textureDisabled){
+
+    public LauncherTexturedButton(BufferedImage texture, BufferedImage textureHover, BufferedImage textureDisabled) {
         this.texture = texture;
         this.textureHover = textureHover;
         this.textureDisabled = textureDisabled;
@@ -32,20 +34,20 @@ public class LauncherTexturedButton extends LauncherButton {
 
 
     @Override
-    public void paintComponent(Graphics g){
+    public void paintComponent(Graphics g) {
         //super.paintComponent(g);
         setOpaque(false);
         setBackground(NLib.TRANSPARENT);
         Image buttonTexture;
 
-        if(isEnabled()){
-            if(isHover())buttonTexture = this.textureHover;
+        if (isEnabled()) {
+            if (isHover()) buttonTexture = this.textureHover;
             else buttonTexture = this.texture;
-        }else buttonTexture = this.textureDisabled;
+        } else buttonTexture = this.textureDisabled;
 
         g.drawImage(buttonTexture, 0, 0, getWidth(), getHeight(), this);
 
-        if(getTextColor() != null) g.setColor(getTextColor());
+        if (getTextColor() != null) g.setColor(getTextColor());
         drawCenteredString(g, getText(), this.getBounds());
         g.setColor(null);
 

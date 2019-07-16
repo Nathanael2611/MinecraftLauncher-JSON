@@ -25,38 +25,33 @@ import java.util.ArrayList;
  * The Game Type
  *
  * <p>
- *     This class contains the specifics informations about a version
- *     or a group of verison of Minecraft.
- *
- *     It contains its main class, and its arguments.
+ * This class contains the specifics informations about a version
+ * or a group of verison of Minecraft.
+ * <p>
+ * It contains its main class, and its arguments.
  * </p>
  *
  * @author Litarvan
  * @version 3.0.4
  * @since 2.0.0-SNAPSHOT
  */
-public abstract class GameType
-{
+public abstract class GameType {
     /**
      * The 1.5.2 or Lower game type
      */
-    public static final GameType V1_5_2_LOWER = new GameType()
-    {
+    public static final GameType V1_5_2_LOWER = new GameType() {
         @Override
-        public String getName()
-        {
+        public String getName() {
             return "1.5.2 or lower";
         }
 
         @Override
-        public String getMainClass(GameInfos infos)
-        {
+        public String getMainClass(GameInfos infos) {
             return "net.minecraft.launchwrapper.Launch";
         }
 
         @Override
-        public ArrayList<String> getLaunchArgs(GameInfos infos, GameFolder folder, AuthInfos authInfos)
-        {
+        public ArrayList<String> getLaunchArgs(GameInfos infos, GameFolder folder, AuthInfos authInfos) {
             ArrayList<String> arguments = new ArrayList<String>();
 
             arguments.add(authInfos.getUsername());
@@ -77,23 +72,19 @@ public abstract class GameType
     /**
      * The 1.7.2 or Lower game type
      */
-    public static final GameType V1_7_2_LOWER = new GameType()
-    {
+    public static final GameType V1_7_2_LOWER = new GameType() {
         @Override
-        public String getName()
-        {
+        public String getName() {
             return "1.7.2 or lower";
         }
 
         @Override
-        public String getMainClass(GameInfos infos)
-        {
+        public String getMainClass(GameInfos infos) {
             return "net.minecraft.client.main.Main";
         }
 
         @Override
-        public ArrayList<String> getLaunchArgs(GameInfos infos, GameFolder folder, AuthInfos authInfos)
-        {
+        public ArrayList<String> getLaunchArgs(GameInfos infos, GameFolder folder, AuthInfos authInfos) {
             ArrayList<String> arguments = new ArrayList<String>();
 
             arguments.add("--username=" + authInfos.getUsername());
@@ -127,23 +118,19 @@ public abstract class GameType
     /**
      * The 1.7.10 Game Type
      */
-    public static final GameType V1_7_10 = new GameType()
-    {
+    public static final GameType V1_7_10 = new GameType() {
         @Override
-        public String getName()
-        {
+        public String getName() {
             return "1.7.10";
         }
 
         @Override
-        public String getMainClass(GameInfos infos)
-        {
+        public String getMainClass(GameInfos infos) {
             return "net.minecraft.client.main.Main";
         }
 
         @Override
-        public ArrayList<String> getLaunchArgs(GameInfos infos, GameFolder folder, AuthInfos authInfos)
-        {
+        public ArrayList<String> getLaunchArgs(GameInfos infos, GameFolder folder, AuthInfos authInfos) {
             ArrayList<String> arguments = new ArrayList<String>();
 
             arguments.add("--username=" + authInfos.getUsername());
@@ -151,8 +138,7 @@ public abstract class GameType
             arguments.add("--accessToken");
             arguments.add(authInfos.getAccessToken());
 
-            if (authInfos.getClientToken() != null)
-            {
+            if (authInfos.getClientToken() != null) {
                 arguments.add("--clientToken");
                 arguments.add(authInfos.getClientToken());
             }
@@ -186,23 +172,19 @@ public abstract class GameType
     /**
      * The 1.8 or higher Game Type
      */
-    public static final GameType V1_8_HIGHER = new GameType()
-    {
+    public static final GameType V1_8_HIGHER = new GameType() {
         @Override
-        public String getName()
-        {
+        public String getName() {
             return "1.8 or higher";
         }
 
         @Override
-        public String getMainClass(GameInfos infos)
-        {
+        public String getMainClass(GameInfos infos) {
             return "net.minecraft.client.main.Main";
         }
 
         @Override
-        public ArrayList<String> getLaunchArgs(GameInfos infos, GameFolder folder, AuthInfos authInfos)
-        {
+        public ArrayList<String> getLaunchArgs(GameInfos infos, GameFolder folder, AuthInfos authInfos) {
             ArrayList<String> arguments = new ArrayList<String>();
 
             arguments.add("--username=" + authInfos.getUsername());
@@ -210,8 +192,7 @@ public abstract class GameType
             arguments.add("--accessToken");
             arguments.add(authInfos.getAccessToken());
 
-            if (authInfos.getClientToken() != null)
-            {
+            if (authInfos.getClientToken() != null) {
                 arguments.add("--clientToken");
                 arguments.add(authInfos.getClientToken());
             }
@@ -233,13 +214,12 @@ public abstract class GameType
             int first = version.indexOf('.');
             int second = version.lastIndexOf('.');
 
-            if (first != second)
-            {
+            if (first != second) {
                 version = version.substring(0, version.lastIndexOf('.'));
             }
 
             if (infos.getGameVersion().getName().equals("1.13.1") || infos.getGameVersion().getName().equals("1.13.2"))
-            	version = "1.13.1";
+                version = "1.13.1";
 
             arguments.add(version);
 
@@ -256,80 +236,75 @@ public abstract class GameType
         }
     };
 
-	/**
-	 * This is a workaround until a new version of the lib using versions JSON is published
-	 */
-	public static final GameType V1_13_HIGHER_FORGE = new GameType()
-	{
-		@Override
-		public String getName()
-		{
-			return "1.13 or higher with Forge";
-		}
+    /**
+     * This is a workaround until a new version of the lib using versions JSON is published
+     */
+    public static final GameType V1_13_HIGHER_FORGE = new GameType() {
+        @Override
+        public String getName() {
+            return "1.13 or higher with Forge";
+        }
 
-		@Override
-		public String getMainClass(GameInfos infos)
-		{
-			return "cpw.mods.modlauncher.Launcher";
-		}
+        @Override
+        public String getMainClass(GameInfos infos) {
+            return "cpw.mods.modlauncher.Launcher";
+        }
 
-		@Override
-		public ArrayList<String> getLaunchArgs(GameInfos infos, GameFolder folder, AuthInfos authInfos)
-		{
-			ArrayList<String> arguments = new ArrayList<String>();
+        @Override
+        public ArrayList<String> getLaunchArgs(GameInfos infos, GameFolder folder, AuthInfos authInfos) {
+            ArrayList<String> arguments = new ArrayList<String>();
 
-			arguments.add("--username=" + authInfos.getUsername());
+            arguments.add("--username=" + authInfos.getUsername());
 
-			arguments.add("--accessToken");
-			arguments.add(authInfos.getAccessToken());
+            arguments.add("--accessToken");
+            arguments.add(authInfos.getAccessToken());
 
-			if (authInfos.getClientToken() != null)
-			{
-				arguments.add("--clientToken");
-				arguments.add(authInfos.getClientToken());
-			}
+            if (authInfos.getClientToken() != null) {
+                arguments.add("--clientToken");
+                arguments.add(authInfos.getClientToken());
+            }
 
-			arguments.add("--version");
-			arguments.add(infos.getGameVersion().getName());
+            arguments.add("--version");
+            arguments.add(infos.getGameVersion().getName());
 
-			arguments.add("--gameDir");
-			arguments.add(infos.getGameDir().getAbsolutePath());
+            arguments.add("--gameDir");
+            arguments.add(infos.getGameDir().getAbsolutePath());
 
-			arguments.add("--assetsDir");
-			File assetsDir = new File(infos.getGameDir(), folder.getAssetsFolder());
-			arguments.add(assetsDir.getAbsolutePath());
+            arguments.add("--assetsDir");
+            File assetsDir = new File(infos.getGameDir(), folder.getAssetsFolder());
+            arguments.add(assetsDir.getAbsolutePath());
 
-			arguments.add("--assetIndex");
+            arguments.add("--assetIndex");
 
-			arguments.add("1.13.1");
+            arguments.add("1.13.1");
 
-			arguments.add("--userProperties");
-			arguments.add("{}");
+            arguments.add("--userProperties");
+            arguments.add("{}");
 
-			arguments.add("--uuid");
-			arguments.add(authInfos.getUuid());
+            arguments.add("--uuid");
+            arguments.add(authInfos.getUuid());
 
-			arguments.add("--userType");
-			arguments.add("legacy");
+            arguments.add("--userType");
+            arguments.add("legacy");
 
-			arguments.add("--launchTarget");
-			arguments.add("fmlclient");
+            arguments.add("--launchTarget");
+            arguments.add("fmlclient");
 
-			arguments.add("--fml.forgeVersion");
-			arguments.add("25.0.219");
+            arguments.add("--fml.forgeVersion");
+            arguments.add("25.0.219");
 
-			arguments.add("--fml.mcVersion");
-			arguments.add("1.13.2");
+            arguments.add("--fml.mcVersion");
+            arguments.add("1.13.2");
 
-			arguments.add("--fml.forgeGroup");
-			arguments.add("net.minecraftforge");
+            arguments.add("--fml.forgeGroup");
+            arguments.add("net.minecraftforge");
 
-			arguments.add("--fml.mcpVersion");
-			arguments.add("20190213.203750");
+            arguments.add("--fml.mcpVersion");
+            arguments.add("20190213.203750");
 
-			return arguments;
-		}
-	};
+            return arguments;
+        }
+    };
 
     /**
      * The name of the Game Type
@@ -342,7 +317,6 @@ public abstract class GameType
      * Returns the main class of the Minecraft Game Type
      *
      * @param infos The infos of the game
-     *
      * @return The main class
      */
     public abstract String getMainClass(GameInfos infos);
@@ -353,7 +327,6 @@ public abstract class GameType
      * @param infos     The infos of the game
      * @param folder    The current GameFolder
      * @param authInfos The current AuthInfos
-     *
      * @return The launch arguments
      */
     public abstract ArrayList<String> getLaunchArgs(GameInfos infos, GameFolder folder, AuthInfos authInfos);

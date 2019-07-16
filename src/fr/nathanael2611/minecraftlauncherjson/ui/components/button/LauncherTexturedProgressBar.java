@@ -14,10 +14,10 @@ public class LauncherTexturedProgressBar extends LauncherProgressBar {
     }
 
     @Override
-    public void paintComponent(Graphics g){
+    public void paintComponent(Graphics g) {
         g.drawImage(emptyTexture, 0, 0, getWidth(), getHeight(), this);
 
-        BufferedImage subForeground = emptyTexture.getSubimage(0, 0, (level*getWidth())/maxLevel, getHeight());
+        BufferedImage subForeground = emptyTexture.getSubimage(0, 0, (level * getWidth()) / maxLevel, getHeight());
         g.drawImage(subForeground, 0, 0, subForeground.getWidth(), subForeground.getHeight(), this);
 
         //g.drawImage(fillTexture, 0, 0, (level*getWidth())/maxLevel, getHeight(), this);

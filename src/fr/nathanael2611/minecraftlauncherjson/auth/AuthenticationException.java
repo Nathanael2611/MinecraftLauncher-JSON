@@ -12,8 +12,7 @@ public class AuthenticationException extends Exception {
     /**
      * Create a new Authentication Exception
      *
-     * @param model
-     *            The given JSON model instance of the error
+     * @param model The given JSON model instance of the error
      */
     public AuthenticationException(AuthError model) {
         super(model.getErrorMessage());

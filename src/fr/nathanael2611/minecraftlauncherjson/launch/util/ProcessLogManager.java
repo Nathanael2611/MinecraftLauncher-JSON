@@ -18,27 +18,20 @@
  */
 package fr.nathanael2611.minecraftlauncherjson.launch.util;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 
 /**
  * The Process Log Manager
  *
  * <p>
- *     Manager logs of a Process by printing and/or writing them.
+ * Manager logs of a Process by printing and/or writing them.
  * </p>
  *
  * @author Litarvan
  * @version 3.0.2-BETA
  * @see Process
  */
-public class ProcessLogManager extends Thread
-{
+public class ProcessLogManager extends Thread {
     /**
      * If the logs should be printed
      */
@@ -64,8 +57,7 @@ public class ProcessLogManager extends Thread
      *
      * @param input The input where to read the logs
      */
-    public ProcessLogManager(InputStream input)
-    {
+    public ProcessLogManager(InputStream input) {
         this(input, null);
     }
 
@@ -75,56 +67,41 @@ public class ProcessLogManager extends Thread
      * @param input   The input where to read the logs
      * @param toWrite The files where to write the logs (optional)
      */
-    public ProcessLogManager(InputStream input, File toWrite)
-    {
+    public ProcessLogManager(InputStream input, File toWrite) {
         this.reader = new BufferedReader(new InputStreamReader(input));
         this.toWrite = toWrite;
 
         if (toWrite != null)
-            try
-            {
+            try {
                 this.writer = new BufferedWriter(new FileWriter(toWrite));
-            }
-            catch (IOException e)
-            {
+            } catch (IOException e) {
             }
     }
 
     @Override
-    public void run()
-    {
+    public void run() {
         String line;
-        try
-        {
-            while ((line = reader.readLine()) != null)
-            {
+        try {
+            while ((line = reader.readLine()) != null) {
                 if (print)
                     System.out.println(line);
 
                 if (writer != null)
-                    try
-                    {
+                    try {
                         writer.write(line + "\n");
-                    }
-                    catch (IOException e)
-                    {
+                    } catch (IOException e) {
                         e.printStackTrace();
                     }
             }
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
 
             this.interrupt();
         }
 
         if (writer != null)
-            try
-            {
+            try {
                 writer.close();
-            }
-            catch (IOException ignored)
-            {
+            } catch (IOException ignored) {
             }
     }
 
@@ -133,8 +110,7 @@ public class ProcessLogManager extends Thread
      *
      * @return True if they are, false if not
      */
-    public boolean isPrint()
-    {
+    public boolean isPrint() {
         return print;
     }
 
@@ -143,8 +119,7 @@ public class ProcessLogManager extends Thread
      *
      * @param print If they should be printed
      */
-    public void setPrint(boolean print)
-    {
+    public void setPrint(boolean print) {
         this.print = print;
     }
 
@@ -153,8 +128,7 @@ public class ProcessLogManager extends Thread
      *
      * @return The file where are written the logs
      */
-    public File getToWrite()
-    {
+    public File getToWrite() {
         return toWrite;
     }
 
@@ -163,8 +137,7 @@ public class ProcessLogManager extends Thread
      *
      * @param toWrite The new file
      */
-    public void setToWrite(File toWrite)
-    {
+    public void setToWrite(File toWrite) {
         this.toWrite = toWrite;
     }
 }

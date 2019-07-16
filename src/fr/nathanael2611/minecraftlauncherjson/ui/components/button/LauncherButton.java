@@ -7,38 +7,34 @@ import java.awt.event.MouseListener;
 
 public class LauncherButton extends JButton implements MouseListener {
 
-    public LauncherButton(){
+    private Color textColor = null;
+    private String text;
+    private boolean hover;
+    private boolean clicked;
+
+    public LauncherButton() {
         addMouseListener(this);
     }
 
-
-    private Color textColor = null;
-    private String text;
-
-
-
     @Override
-    public String getText(){
+    public String getText() {
         return text;
     }
 
     @Override
-    public void setText(String text){
+    public void setText(String text) {
         this.text = text;
         repaint();
     }
 
-    public void setTextColor(Color textColor){
-        this.textColor = textColor;
-        repaint();
-    }
-
-    public Color getTextColor(){
+    public Color getTextColor() {
         return textColor;
     }
 
-    private boolean hover;
-    private boolean clicked;
+    public void setTextColor(Color textColor) {
+        this.textColor = textColor;
+        repaint();
+    }
 
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -55,7 +51,8 @@ public class LauncherButton extends JButton implements MouseListener {
     }
 
     @Override
-    public void mouseReleased(MouseEvent e) {}
+    public void mouseReleased(MouseEvent e) {
+    }
 
     @Override
     public void mouseEntered(MouseEvent e) {
@@ -70,17 +67,16 @@ public class LauncherButton extends JButton implements MouseListener {
     }
 
 
-
-    public boolean isHover(){
+    public boolean isHover() {
         return hover;
     }
 
-    public boolean isClicked(){
+    public boolean isClicked() {
         return clicked;
     }
 
     @Override
-    public void paintComponent(Graphics g){
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
 

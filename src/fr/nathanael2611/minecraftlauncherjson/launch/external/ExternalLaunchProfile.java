@@ -25,15 +25,14 @@ import java.util.List;
  * The External Launch Profile
  *
  * <p>
- *     Contains the informations about an external launching.
+ * Contains the informations about an external launching.
  * </p>
  *
  * @author Litarvan
  * @version 3.0.2-BETA
  * @since 3.0.0-BETA
  */
-public class ExternalLaunchProfile
-{
+public class ExternalLaunchProfile {
     /**
      * The program main class
      */
@@ -78,8 +77,7 @@ public class ExternalLaunchProfile
      * @param classPath The classpath (you can create it using the {@link ClasspathConstructor})
      *                  It contains the path to your dependencies and your main jar
      */
-    public ExternalLaunchProfile(String mainClass, String classPath)
-    {
+    public ExternalLaunchProfile(String mainClass, String classPath) {
         this(mainClass, classPath, null, null);
     }
 
@@ -92,8 +90,7 @@ public class ExternalLaunchProfile
      * @param vmArgs    The VM arguments (optional)
      * @param args      Your program arguments (optional)
      */
-    public ExternalLaunchProfile(String mainClass, String classPath, List<String> vmArgs, List<String> args)
-    {
+    public ExternalLaunchProfile(String mainClass, String classPath, List<String> vmArgs, List<String> args) {
         this(mainClass, classPath, vmArgs, args, false, null, null);
     }
 
@@ -109,8 +106,7 @@ public class ExternalLaunchProfile
      * @param macDockName         The name in the mac dock
      * @param directory           The directory where the process need to be launched
      */
-    public ExternalLaunchProfile(String mainClass, String classPath, List<String> vmArgs, List<String> args, boolean redirectErrorStream, String macDockName, File directory)
-    {
+    public ExternalLaunchProfile(String mainClass, String classPath, List<String> vmArgs, List<String> args, boolean redirectErrorStream, String macDockName, File directory) {
         this.mainClass = mainClass;
         this.classPath = classPath;
         this.vmArgs = vmArgs;
@@ -125,8 +121,7 @@ public class ExternalLaunchProfile
      *
      * @return The main class
      */
-    public String getMainClass()
-    {
+    public String getMainClass() {
         return mainClass;
     }
 
@@ -135,8 +130,7 @@ public class ExternalLaunchProfile
      *
      * @param mainClass The new main class
      */
-    public void setMainClass(String mainClass)
-    {
+    public void setMainClass(String mainClass) {
         this.mainClass = mainClass;
     }
 
@@ -145,8 +139,7 @@ public class ExternalLaunchProfile
      *
      * @return The classpath
      */
-    public String getClassPath()
-    {
+    public String getClassPath() {
         return classPath;
     }
 
@@ -155,8 +148,7 @@ public class ExternalLaunchProfile
      *
      * @param classPath The new classpath (you can create it using the {@link ClasspathConstructor})
      */
-    public void setClassPath(String classPath)
-    {
+    public void setClassPath(String classPath) {
         this.classPath = classPath;
     }
 
@@ -165,8 +157,7 @@ public class ExternalLaunchProfile
      *
      * @return The VM arguments
      */
-    public List<String> getVmArgs()
-    {
+    public List<String> getVmArgs() {
         return vmArgs;
     }
 
@@ -175,8 +166,7 @@ public class ExternalLaunchProfile
      *
      * @param vmArgs The new VM arguments
      */
-    public void setVmArgs(List<String> vmArgs)
-    {
+    public void setVmArgs(List<String> vmArgs) {
         this.vmArgs = vmArgs;
     }
 
@@ -185,8 +175,7 @@ public class ExternalLaunchProfile
      *
      * @return The arguments
      */
-    public List<String> getArgs()
-    {
+    public List<String> getArgs() {
         return args;
     }
 
@@ -195,8 +184,7 @@ public class ExternalLaunchProfile
      *
      * @param args The new arguments
      */
-    public void setArgs(List<String> args)
-    {
+    public void setArgs(List<String> args) {
         this.args = args;
     }
 
@@ -205,8 +193,7 @@ public class ExternalLaunchProfile
      *
      * @return If the error stream is redirected
      */
-    public boolean isRedirectErrorStream()
-    {
+    public boolean isRedirectErrorStream() {
         return redirectErrorStream;
     }
 
@@ -215,8 +202,7 @@ public class ExternalLaunchProfile
      *
      * @param redirectErrorStream The new value
      */
-    public void setRedirectErrorStream(boolean redirectErrorStream)
-    {
+    public void setRedirectErrorStream(boolean redirectErrorStream) {
         this.redirectErrorStream = redirectErrorStream;
     }
 
@@ -225,8 +211,7 @@ public class ExternalLaunchProfile
      *
      * @return The mac dock name
      */
-    public String getMacDockName()
-    {
+    public String getMacDockName() {
         return macDockName;
     }
 
@@ -235,8 +220,7 @@ public class ExternalLaunchProfile
      *
      * @param macDockName The new dock name
      */
-    public void setMacDockName(String macDockName)
-    {
+    public void setMacDockName(String macDockName) {
         this.macDockName = macDockName;
     }
 
@@ -245,8 +229,7 @@ public class ExternalLaunchProfile
      *
      * @return The program directory
      */
-    public File getDirectory()
-    {
+    public File getDirectory() {
         return directory;
     }
 
@@ -255,8 +238,7 @@ public class ExternalLaunchProfile
      *
      * @param directory The program directory
      */
-    public void setDirectory(File directory)
-    {
+    public void setDirectory(File directory) {
         this.directory = directory;
     }
 }

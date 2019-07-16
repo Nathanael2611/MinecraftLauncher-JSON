@@ -22,22 +22,20 @@ package fr.nathanael2611.minecraftlauncherjson.launch;
  * The Fail Exception
  *
  * <p>
- *     Best exception ever made
+ * Best exception ever made
  * </p>
  *
  * @author Litarvan
  * @version 3.0.2-BETA
  * @since 3.0.0-BETA
  */
-public class FailException extends RuntimeException
-{
+public class FailException extends RuntimeException {
     /**
      * Normal constructor
      *
      * @param message The message
      */
-    public FailException(String message)
-    {
+    public FailException(String message) {
         super("Ups ! Looks like you failed : " + message);
     }
 
@@ -47,8 +45,7 @@ public class FailException extends RuntimeException
      * @param message The message
      * @param cause   The cause
      */
-    public FailException(String message, Throwable cause)
-    {
+    public FailException(String message, Throwable cause) {
         super("Ups ! Looks like you failed : " + message, cause);
     }
 }

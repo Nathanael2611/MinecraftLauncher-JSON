@@ -24,27 +24,24 @@ import java.io.File;
  * The Minecraft Game Dir Generator
  *
  * <p>
- *     This class contains a method to generate the minecraft directory of
- *     the current OS like the default of Minecraft.
+ * This class contains a method to generate the minecraft directory of
+ * the current OS like the default of Minecraft.
  * </p>
  *
  * @author Litarvan
  * @version 3.0.2-BETA
  * @since 2.0.0-BETA
  */
-public class GameDirGenerator
-{
+public class GameDirGenerator {
     /**
      * Generate the game directory of the current OS by the given
      * server name, like the default of Minecraft.
      *
      * @param serverName The server name that will be the directory
      *                   name.
-     *
      * @return The generated game directory
      */
-    public static File createGameDir(String serverName)
-    {
+    public static File createGameDir(String serverName) {
         String os = System.getProperty("os.name").toLowerCase();
         if (os.contains("win"))
             return new File(System.getProperty("user.home") + "\\AppData\\Roaming\\." + serverName);

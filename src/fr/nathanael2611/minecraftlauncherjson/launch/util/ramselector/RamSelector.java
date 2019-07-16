@@ -20,28 +20,22 @@ package fr.nathanael2611.minecraftlauncherjson.launch.util.ramselector;
 
 import fr.nathanael2611.minecraftlauncherjson.launch.util.CrashReporter;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import javax.swing.*;
+import java.io.*;
 import java.lang.reflect.Constructor;
-import javax.swing.JFrame;
 
 /**
  * The RAM Selector
  *
  * <p>
- *     A Tool to select the RAM for your project.
+ * A Tool to select the RAM for your project.
  * </p>
  *
  * @author Litarvan
  * @version 3.0.2-BETA
  * @since 3.0.0-BETA
  */
-public class RamSelector
-{
+public class RamSelector {
 
     /**
      * The RAM !
@@ -68,8 +62,7 @@ public class RamSelector
      *
      * @param file The file where to save the RAM
      */
-    public RamSelector(File file)
-    {
+    public RamSelector(File file) {
         this.file = file;
     }
 
@@ -78,15 +71,12 @@ public class RamSelector
      *
      * @return The displayed frame, an instance of the given
      * frame class (by default OptionFrame)
-     *
      * @see #setFrameClass(Class)
      * @see #getFrameClass()
      */
-    public JFrame display()
-    {
+    public JFrame display() {
         if (frame == null)
-            try
-            {
+            try {
                 Constructor[] contructors = frameClass.getDeclaredConstructors();
 
                 Constructor constructor = null;
@@ -99,9 +89,7 @@ public class RamSelector
 
                 frame = (AbstractOptionFrame) constructor.newInstance(this);
                 frame.setSelectedIndex(readRam());
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 System.err.println("[OpenLauncherLib] Can't display the Ram Selector !");
                 System.err.println(CrashReporter.makeCrashReport("OpenLauncherLib Ram Selector", e));
 
@@ -118,8 +106,7 @@ public class RamSelector
      *
      * @return An array of two strings containing the arguments
      */
-    public String[] getRamArguments()
-    {
+    public String[] getRamArguments() {
         int maxRam = Integer.parseInt(frame == null ? RAM_ARRAY[readRam()].replace("Go", "") : RAM_ARRAY[frame.getSelectedIndex()].replace("Go", "")) * 1024;
         int minRam = maxRam - 512;
 
@@ -131,30 +118,21 @@ public class RamSelector
      *
      * @return An int, of the selected index of RAM_ARRAY
      */
-    private int readRam()
-    {
+    private int readRam() {
         BufferedReader br = null;
-        try
-        {
+        try {
             br = new BufferedReader(new FileReader(file));
             String ramText = br.readLine();
 
             if (ramText != null)
                 return Integer.parseInt(ramText);
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             System.err.println("[OpenLauncherLib] WARNING: Can't read ram : " + e);
-        }
-        finally
-        {
+        } finally {
             if (br != null)
-                try
-                {
+                try {
                     br.close();
-                }
-                catch (IOException e)
-                {
+                } catch (IOException e) {
                     System.err.println("[OpenLauncherLib] WARNING: Can't close the file : " + e);
                 }
         }
@@ -165,30 +143,21 @@ public class RamSelector
     /**
      * Save the RAM
      */
-    public void save()
-    {
-	if (frame == null)
+    public void save() {
+        if (frame == null)
             return;
 
         BufferedWriter bw = null;
-        try
-        {
+        try {
             bw = new BufferedWriter(new FileWriter(file));
             bw.write(String.valueOf(frame.getSelectedIndex()));
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             System.err.println("[OpenLauncherLib] WARNING: Can't save ram : " + e);
-        }
-        finally
-        {
+        } finally {
             if (bw != null)
-                try
-                {
+                try {
                     bw.close();
-                }
-                catch (IOException e)
-                {
+                } catch (IOException e) {
                     System.err.println("[OpenLauncherLib] WARNING: Can't close the file : " + e);
                 }
         }
@@ -198,11 +167,9 @@ public class RamSelector
      * Return the file where to save the ram
      *
      * @return The file where the ram is saved
-     *
      * @see #setFile(File)
      */
-    public File getFile()
-    {
+    public File getFile() {
         return file;
     }
 
@@ -210,11 +177,9 @@ public class RamSelector
      * Set the file where to save the ram
      *
      * @param file The new file where the ram is saved
-     *
      * @see #getFile()
      */
-    public void setFile(File file)
-    {
+    public void setFile(File file) {
         this.file = file;
     }
 
@@ -222,11 +187,9 @@ public class RamSelector
      * Return the class of the selector Frame (? extends JFrame)
      *
      * @return The selector frame class
-     *
      * @see #setFrameClass(Class)
      */
-    public Class<? extends JFrame> getFrameClass()
-    {
+    public Class<? extends JFrame> getFrameClass() {
         return frameClass;
     }
 
@@ -234,11 +197,9 @@ public class RamSelector
      * Set the class of the selector Frame (need to be a JFrame)
      *
      * @param frameClass The new class of the selector
-     *
      * @see #getFrameClass()
      */
-    public void setFrameClass(Class<? extends AbstractOptionFrame> frameClass)
-    {
+    public void setFrameClass(Class<? extends AbstractOptionFrame> frameClass) {
         this.frameClass = frameClass;
     }
 }

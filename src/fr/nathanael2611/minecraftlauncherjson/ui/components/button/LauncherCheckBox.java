@@ -6,17 +6,16 @@ import java.awt.event.MouseListener;
 
 public class LauncherCheckBox extends JComponent implements MouseListener {
 
-    public LauncherCheckBox(){
+    boolean isChecked = false;
+
+    public LauncherCheckBox() {
         addMouseListener(this);
         repaint();
     }
 
-    boolean isChecked = false;
-
     @Override
     public void mouseClicked(MouseEvent e) {
-        if(isChecked) isChecked = false;
-        else isChecked = true;
+        isChecked = !isChecked;
         repaint();
     }
 
