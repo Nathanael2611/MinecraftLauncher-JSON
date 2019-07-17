@@ -17,11 +17,11 @@ public class LauncherColoredProgressBar extends LauncherProgressBar {
     }
 
     @Override
-    public void paintComponent(Graphics g){
+    public void paintComponent(Graphics g) {
 
-        NLib.fillColoredRect(g,this, emptyColor);
+        NLib.fillColoredRect(g, this, emptyColor);
         g.setColor(fillColor);
-        g.fillRect(0, 0, (level*getWidth())/maxLevel, getHeight());
+        g.fillRect(0, 0, (level * getWidth()) / maxLevel, getHeight());
 
     }
 

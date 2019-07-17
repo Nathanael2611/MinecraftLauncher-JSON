@@ -21,6 +21,7 @@ package fr.nathanael2611.minecraftlauncherjson.launch.external;
 import fr.nathanael2611.minecraftlauncherjson.launch.JavaUtil;
 import fr.nathanael2611.minecraftlauncherjson.launch.LaunchException;
 import fr.nathanael2611.minecraftlauncherjson.launch.util.ProcessLogManager;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,15 +30,14 @@ import java.util.Arrays;
  * The External Launcher
  *
  * <p>
- *     Launch a program using java command launched by a ProcessBuilder.
+ * Launch a program using java command launched by a ProcessBuilder.
  * </p>
  *
  * @author Litarvan
  * @version 3.0.2-BETA
  * @since 3.0.0-BETA
  */
-public class ExternalLauncher
-{
+public class ExternalLauncher {
     /**
      * The Before Launching Event
      *
@@ -61,11 +61,9 @@ public class ExternalLauncher
      * The External Launcher
      *
      * @param profile The launch profile
-     *
      * @see ExternalLaunchProfile
      */
-    public ExternalLauncher(ExternalLaunchProfile profile)
-    {
+    public ExternalLauncher(ExternalLaunchProfile profile) {
         this(profile, null);
     }
 
@@ -74,12 +72,10 @@ public class ExternalLauncher
      *
      * @param profile        The launch profile
      * @param launchingEvent The launching event (optional)
-     *
      * @see ExternalLaunchProfile
      * @see BeforeLaunchingEvent
      */
-    public ExternalLauncher(ExternalLaunchProfile profile, BeforeLaunchingEvent launchingEvent)
-    {
+    public ExternalLauncher(ExternalLaunchProfile profile, BeforeLaunchingEvent launchingEvent) {
         this.profile = profile;
         this.launchingEvent = launchingEvent;
     }
@@ -87,8 +83,7 @@ public class ExternalLauncher
     /**
      * @return If the logs are enabled
      */
-    public boolean isLogsEnabled()
-    {
+    public boolean isLogsEnabled() {
         return logsEnabled;
     }
 
@@ -97,8 +92,7 @@ public class ExternalLauncher
      *
      * @param logsEnabled If the logs will be enabled
      */
-    public void setLogsEnabled(boolean logsEnabled)
-    {
+    public void setLogsEnabled(boolean logsEnabled) {
         this.logsEnabled = logsEnabled;
     }
 
@@ -106,11 +100,9 @@ public class ExternalLauncher
      * Launch the program !
      *
      * @return The created (and launched) process
-     *
      * @throws LaunchException If it failed something
      */
-    public Process launch() throws LaunchException
-    {
+    public Process launch() throws LaunchException {
 
         ProcessBuilder builder = new ProcessBuilder();
         ArrayList<String> commands = new ArrayList<String>();
@@ -146,20 +138,16 @@ public class ExternalLauncher
             entireCommand += command + " ";
 
 
-        try
-        {
+        try {
             Process p = builder.start();
 
-            if (logsEnabled)
-            {
+            if (logsEnabled) {
                 ProcessLogManager manager = new ProcessLogManager(p.getInputStream());
                 manager.start();
             }
 
             return p;
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             throw new LaunchException("Cannot launch !", e);
         }
     }
@@ -169,11 +157,9 @@ public class ExternalLauncher
      * Null by default, or the given one
      *
      * @return The set launching event
-     *
      * @see BeforeLaunchingEvent
      */
-    public BeforeLaunchingEvent getLaunchingEvent()
-    {
+    public BeforeLaunchingEvent getLaunchingEvent() {
         return launchingEvent;
     }
 
@@ -181,11 +167,9 @@ public class ExternalLauncher
      * Set the launching event (executed just before the launching to customize the ProcessBuilder)
      *
      * @param launchingEvent The launching event to use
-     *
      * @see BeforeLaunchingEvent
      */
-    public void setLaunchingEvent(BeforeLaunchingEvent launchingEvent)
-    {
+    public void setLaunchingEvent(BeforeLaunchingEvent launchingEvent) {
         this.launchingEvent = launchingEvent;
     }
 
@@ -193,11 +177,9 @@ public class ExternalLauncher
      * Return the given launch profile (containing all the launch information)
      *
      * @return The launch profile
-     *
      * @see ExternalLaunchProfile
      */
-    public ExternalLaunchProfile getProfile()
-    {
+    public ExternalLaunchProfile getProfile() {
         return profile;
     }
 
@@ -205,11 +187,9 @@ public class ExternalLauncher
      * Set a new launch profile
      *
      * @param profile The new profile
-     *
      * @see ExternalLaunchProfile
      */
-    public void setProfile(ExternalLaunchProfile profile)
-    {
+    public void setProfile(ExternalLaunchProfile profile) {
         this.profile = profile;
     }
 }

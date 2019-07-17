@@ -24,9 +24,9 @@ import java.io.File;
  * The Explorer
  *
  * <p>
- *     Use the explorer to explore some directories.
+ * Use the explorer to explore some directories.
  * </p>
- *
+ * <p>
  * Code example :
  *
  * <pre>
@@ -34,24 +34,42 @@ import java.io.File;
  *     explorer.cd("mysub");
  *     List files = explorer.files(); // Return the list of files in the mysub directory
  * </pre>
- *
+ * <p>
  * The Explorer is extending ExploredDirectory, so you can use .files() or .subs() etc...
  *
  * @author Litarvan
  * @version 3.0.2-BETA
- * @since 3.0.0-BETA
  * @see ExploredDirectory
+ * @since 3.0.0-BETA
  */
-public class Explorer extends ExploredDirectory
-{
+public class Explorer extends ExploredDirectory {
     /**
      * The Explorer
      *
      * @param directory The directory to explore
      */
-    public Explorer(File directory)
-    {
+    public Explorer(File directory) {
         super(directory);
+    }
+
+    /**
+     * Explore a directory
+     *
+     * @param dir The path of directory to explore
+     * @return An {@link ExploredDirectory} object
+     */
+    public static ExploredDirectory dir(String dir) {
+        return dir(new File(dir));
+    }
+
+    /**
+     * Explore a directory
+     *
+     * @param dir The directory to explore
+     * @return An {@link ExploredDirectory} object
+     */
+    public static ExploredDirectory dir(File dir) {
+        return new ExploredDirectory(FilesUtil.dir(dir));
     }
 
     /**
@@ -59,8 +77,7 @@ public class Explorer extends ExploredDirectory
      *
      * @param cd The directory to explore
      */
-    public void cd(File cd)
-    {
+    public void cd(File cd) {
         this.directory = cd;
     }
 
@@ -69,32 +86,7 @@ public class Explorer extends ExploredDirectory
      *
      * @param cd The name of the sub directory
      */
-    public void cd(String cd)
-    {
+    public void cd(String cd) {
         this.directory = FilesUtil.get(directory, cd);
-    }
-
-    /**
-     * Explore a directory
-     *
-     * @param dir The path of directory to explore
-     *
-     * @return An {@link ExploredDirectory} object
-     */
-    public static ExploredDirectory dir(String dir)
-    {
-        return dir(new File(dir));
-    }
-
-    /**
-     * Explore a directory
-     *
-     * @param dir The directory to explore
-     *
-     * @return An {@link ExploredDirectory} object
-     */
-    public static ExploredDirectory dir(File dir)
-    {
-        return new ExploredDirectory(FilesUtil.dir(dir));
     }
 }

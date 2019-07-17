@@ -22,15 +22,14 @@ package fr.nathanael2611.minecraftlauncherjson.launch.minecraft;
  * The Game Folder
  *
  * <p>
- *     The Game Folder contains the Minecraft folder organisation.
+ * The Game Folder contains the Minecraft folder organisation.
  * </p>
  *
  * @author Litarvan
  * @version 3.0.2-BETA
  * @since 2.0.0-SNAPSHOT
  */
-public class GameFolder
-{
+public class GameFolder {
 
     /**
      * The basic game folder (assets, libs, natives, minecraft.jar)
@@ -65,8 +64,7 @@ public class GameFolder
      * @param nativesFolder The name of the folder containing the natives
      * @param mainJar       The name of the main Jar
      */
-    public GameFolder(String assetsFolder, String libsFolder, String nativesFolder, String mainJar)
-    {
+    public GameFolder(String assetsFolder, String libsFolder, String nativesFolder, String mainJar) {
         this.assetsFolder = assetsFolder;
         this.libsFolder = libsFolder;
         this.nativesFolder = nativesFolder;
@@ -78,8 +76,7 @@ public class GameFolder
      *
      * @return The name of the assets folder
      */
-    public String getAssetsFolder()
-    {
+    public String getAssetsFolder() {
         return assetsFolder;
     }
 
@@ -88,8 +85,7 @@ public class GameFolder
      *
      * @return The name of the librairies folder
      */
-    public String getLibsFolder()
-    {
+    public String getLibsFolder() {
         return libsFolder;
     }
 
@@ -98,8 +94,7 @@ public class GameFolder
      *
      * @return The name of the natives folder
      */
-    public String getNativesFolder()
-    {
+    public String getNativesFolder() {
         return nativesFolder;
     }
 
@@ -108,8 +103,7 @@ public class GameFolder
      *
      * @return The main jar
      */
-    public String getMainJar()
-    {
+    public String getMainJar() {
         return mainJar;
     }
 

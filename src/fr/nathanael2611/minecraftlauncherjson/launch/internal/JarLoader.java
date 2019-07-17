@@ -31,7 +31,7 @@ import java.util.List;
  * The Jar Loader
  *
  * <p>
- *     Load jars to the current classpath
+ * Load jars to the current classpath
  * </p>
  *
  * @author Litarvan
@@ -39,17 +39,14 @@ import java.util.List;
  * @deprecated Crash when used with Java 9
  */
 @Deprecated
-public class JarLoader
-{
+public class JarLoader {
     /**
      * Loads a file array
      *
      * @param files The jars to load
-     *
      * @throws ClasspathException If it failed
      */
-    public static void load(File[] files) throws ClasspathException
-    {
+    public static void load(File[] files) throws ClasspathException {
         load(Arrays.asList(files));
     }
 
@@ -57,11 +54,9 @@ public class JarLoader
      * Loads a file list
      *
      * @param list The list to load
-     *
      * @throws ClasspathException If it failed
      */
-    public static void load(FileList list) throws ClasspathException
-    {
+    public static void load(FileList list) throws ClasspathException {
         load(list.get());
     }
 
@@ -69,11 +64,9 @@ public class JarLoader
      * Loads a list of files
      *
      * @param files The list to load
-     *
      * @throws ClasspathException If it failed
      */
-    public static void load(List<File> files) throws ClasspathException
-    {
+    public static void load(List<File> files) throws ClasspathException {
         for (File file : files)
             addToClasspath(file);
     }
@@ -82,25 +75,20 @@ public class JarLoader
      * Load a jar to the classpath
      *
      * @param jar The jar to load
-     *
      * @throws ClasspathException If it failed
      */
-    public static void addToClasspath(File jar) throws ClasspathException
-    {
+    public static void addToClasspath(File jar) throws ClasspathException {
         if (!jar.exists())
             throw new ClasspathException(ClasspathException.JAR_NOT_FOUND_ERROR, jar.getAbsolutePath());
 
         URLClassLoader loader = (URLClassLoader) ClassLoader.getSystemClassLoader();
         Class<URLClassLoader> classLoader = URLClassLoader.class;
 
-        try
-        {
+        try {
             Method method = classLoader.getDeclaredMethod("addURL", URL.class);
             method.setAccessible(true);
             method.invoke(loader, jar.toURI().toURL());
-        }
-        catch (Throwable t)
-        {
+        } catch (Throwable t) {
             t.printStackTrace();
             throw new ClasspathException(ClasspathException.JAR_LOADING_ERROR, jar.getAbsolutePath(), t);
         }

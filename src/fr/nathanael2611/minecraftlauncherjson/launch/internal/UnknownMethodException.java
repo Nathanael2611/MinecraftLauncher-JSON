@@ -24,7 +24,7 @@ import fr.nathanael2611.minecraftlauncherjson.launch.LaunchException;
  * The Unknown Method Exception
  *
  * <p>
- *     Thrown when the given target method is not found
+ * Thrown when the given target method is not found
  * </p>
  *
  * @author Litarvan
@@ -33,15 +33,13 @@ import fr.nathanael2611.minecraftlauncherjson.launch.LaunchException;
  * @deprecated
  */
 @Deprecated
-public class UnknownMethodException extends LaunchException
-{
+public class UnknownMethodException extends LaunchException {
     /**
      * The Unknown method exception
      *
      * @param message The message
      */
-    public UnknownMethodException(String message)
-    {
+    public UnknownMethodException(String message) {
         super(message);
     }
 
@@ -51,8 +49,7 @@ public class UnknownMethodException extends LaunchException
      * @param message The message
      * @param t       The cause
      */
-    public UnknownMethodException(String message, Throwable t)
-    {
+    public UnknownMethodException(String message, Throwable t) {
         super(message, t);
     }
 }

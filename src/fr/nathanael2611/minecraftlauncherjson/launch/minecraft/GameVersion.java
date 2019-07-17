@@ -22,15 +22,14 @@ package fr.nathanael2611.minecraftlauncherjson.launch.minecraft;
  * The Game Version
  *
  * <p>
- *     This contains the type of version, and its precise name.
+ * This contains the type of version, and its precise name.
  * </p>
  *
  * @author Litarvan
  * @version 3.0.2-BETA
  * @since 2.0.0-SNAPSHOT
  */
-public class GameVersion
-{
+public class GameVersion {
     /**
      * The name of the version
      */
@@ -47,8 +46,7 @@ public class GameVersion
      * @param name     The name of the version
      * @param gameType The type of the version
      */
-    public GameVersion(String name, GameType gameType)
-    {
+    public GameVersion(String name, GameType gameType) {
         this.name = name;
         this.gameType = gameType;
     }
@@ -58,8 +56,7 @@ public class GameVersion
      *
      * @return The name of the version
      */
-    public String getName()
-    {
+    public String getName() {
         return this.name;
     }
 
@@ -68,8 +65,7 @@ public class GameVersion
      *
      * @return The type of the version
      */
-    public GameType getGameType()
-    {
+    public GameType getGameType() {
         return gameType;
     }
 }

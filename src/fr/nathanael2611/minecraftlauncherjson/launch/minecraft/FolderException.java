@@ -24,22 +24,20 @@ import fr.nathanael2611.minecraftlauncherjson.launch.LaunchException;
  * The Folder Exception
  *
  * <p>
- *     An exception thrown when the folder is badly made.
+ * An exception thrown when the folder is badly made.
  * </p>
  *
  * @author Litarvan
  * @version 3.0.2-BETA
  * @since 3.0.0-BETA
  */
-public class FolderException extends LaunchException
-{
+public class FolderException extends LaunchException {
     /**
      * The Folder Exception
      *
      * @param message The message
      */
-    public FolderException(String message)
-    {
+    public FolderException(String message) {
         super(message);
     }
 }

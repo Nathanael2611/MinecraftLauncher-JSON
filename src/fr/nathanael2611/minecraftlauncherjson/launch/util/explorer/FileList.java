@@ -27,17 +27,16 @@ import java.util.List;
  * The File List
  *
  * <p>
- *     The File List is a List of files, but with some very useful
- *     methods like the add(File Array / FileList / List of file) methods,
- *     the match method, etc...
+ * The File List is a List of files, but with some very useful
+ * methods like the add(File Array / FileList / List of file) methods,
+ * the match method, etc...
  * </p>
  *
  * @author Litarvan
  * @version 3.0.2-BETA
  * @since 3.0.0-BETA
  */
-public class FileList
-{
+public class FileList {
     /**
      * The file list
      */
@@ -46,8 +45,7 @@ public class FileList
     /**
      * The File List, empty
      */
-    public FileList()
-    {
+    public FileList() {
         this.files = new ArrayList<File>();
     }
 
@@ -56,8 +54,7 @@ public class FileList
      *
      * @param files The files
      */
-    public FileList(List<File> files)
-    {
+    public FileList(List<File> files) {
         this.files = files;
     }
 
@@ -66,8 +63,7 @@ public class FileList
      *
      * @param files The files to add
      */
-    public void add(File... files)
-    {
+    public void add(File... files) {
         this.add(Arrays.asList(files));
     }
 
@@ -76,8 +72,7 @@ public class FileList
      *
      * @param files The list of files to add
      */
-    public void add(List<File> files)
-    {
+    public void add(List<File> files) {
         this.files.addAll(files);
     }
 
@@ -86,8 +81,7 @@ public class FileList
      *
      * @param list The list of files to add
      */
-    public void add(FileList list)
-    {
+    public void add(FileList list) {
         this.add(list.get());
     }
 
@@ -96,11 +90,9 @@ public class FileList
      * the given regex
      *
      * @param regex The regex to apply
-     *
      * @return The generated list
      */
-    public FileList match(String regex)
-    {
+    public FileList match(String regex) {
         ArrayList<File> matching = new ArrayList<File>();
 
         for (File f : files)
@@ -116,8 +108,7 @@ public class FileList
      *
      * @return The generated list
      */
-    public FileList dirs()
-    {
+    public FileList dirs() {
         ArrayList<File> dirs = new ArrayList<File>();
 
         for (File f : files)
@@ -133,8 +124,7 @@ public class FileList
      *
      * @return The generated list
      */
-    public FileList files()
-    {
+    public FileList files() {
         ArrayList<File> files = new ArrayList<File>();
 
         for (File f : this.files)
@@ -149,8 +139,7 @@ public class FileList
      *
      * @return This, as {@link List}
      */
-    public List<File> get()
-    {
+    public List<File> get() {
         return files;
     }
 }

@@ -22,17 +22,16 @@ package fr.nathanael2611.minecraftlauncherjson.launch.external;
  * The Before Launching Event
  *
  * <p>
- *     Event that can be set to the external launching system that
- *     will be launched just before the process is started.
- *     Useful to customize the ProcessBuilder.
+ * Event that can be set to the external launching system that
+ * will be launched just before the process is started.
+ * Useful to customize the ProcessBuilder.
  * </p>
  *
  * @author Litarvan
  * @version 3.0.2-BETA
  * @since 3.0.0-BETA
  */
-public interface BeforeLaunchingEvent
-{
+public interface BeforeLaunchingEvent {
     /**
      * The onLaunching event
      *

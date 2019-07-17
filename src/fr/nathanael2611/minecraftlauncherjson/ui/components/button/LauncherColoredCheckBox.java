@@ -9,19 +9,19 @@ public class LauncherColoredCheckBox extends LauncherCheckBox {
     Color unCheckedColor;
     Color checkedColor;
 
-    public LauncherColoredCheckBox(Color unCheckedColor, Color checkedColor){
+    public LauncherColoredCheckBox(Color unCheckedColor, Color checkedColor) {
         this.unCheckedColor = unCheckedColor;
         this.checkedColor = checkedColor;
     }
 
 
     @Override
-    public void paintComponent(Graphics g){
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        if(isChecked){
+        if (isChecked) {
             NLib.fillColoredRect(g, this, checkedColor);
-        }else{
+        } else {
             NLib.fillColoredRect(g, this, unCheckedColor);
         }
 

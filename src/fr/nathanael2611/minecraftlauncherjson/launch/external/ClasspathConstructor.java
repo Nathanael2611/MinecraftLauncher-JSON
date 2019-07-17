@@ -27,8 +27,8 @@ import java.util.List;
  * The Classpath Constructor
  *
  * <p>
- *     A FileList but that can construct a classpath String (libs.jar;test.jar;libs/myjar.jar)
- *     (with : instead of ; on Mac and Linux)
+ * A FileList but that can construct a classpath String (libs.jar;test.jar;libs/myjar.jar)
+ * (with : instead of ; on Mac and Linux)
  * </p>
  *
  * @author Litarvan
@@ -36,13 +36,11 @@ import java.util.List;
  * @see FileList
  * @since 3.0.0-BETA
  */
-public class ClasspathConstructor extends FileList
-{
+public class ClasspathConstructor extends FileList {
     /**
      * Empty Classpath Constructor
      */
-    public ClasspathConstructor()
-    {
+    public ClasspathConstructor() {
         super();
     }
 
@@ -51,8 +49,7 @@ public class ClasspathConstructor extends FileList
      *
      * @param classPath The files to add
      */
-    public ClasspathConstructor(List<File> classPath)
-    {
+    public ClasspathConstructor(List<File> classPath) {
         super(classPath);
     }
 
@@ -61,8 +58,7 @@ public class ClasspathConstructor extends FileList
      *
      * @return Something like libs.jar;test.jar;libs/myjar.jar (with : instead of ; on Mac and Linux)
      */
-    public String make()
-    {
+    public String make() {
         String classPath = "";
 
         for (int i = 0; i < files.size(); i++)

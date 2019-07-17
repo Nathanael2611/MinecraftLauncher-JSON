@@ -27,14 +27,10 @@ public class AuthResponse {
     /**
      * Auth Response constructor
      *
-     * @param accessToken
-     *            The access token
-     * @param clientToken
-     *            The client token (same as the one given by the request)
-     * @param availableProfiles
-     *            All available profiles
-     * @param selectedProfile
-     *            The current selected profile from the agent
+     * @param accessToken       The access token
+     * @param clientToken       The client token (same as the one given by the request)
+     * @param availableProfiles All available profiles
+     * @param selectedProfile   The current selected profile from the agent
      */
     public AuthResponse(String accessToken, String clientToken, AuthProfile[] availableProfiles, AuthProfile selectedProfile) {
         this.accessToken = accessToken;

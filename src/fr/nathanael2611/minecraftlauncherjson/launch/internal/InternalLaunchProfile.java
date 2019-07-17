@@ -28,7 +28,7 @@ import java.util.List;
  * The Internal Launch Profile
  *
  * <p>
- *     Contains all the informations about an internal launching
+ * Contains all the informations about an internal launching
  * </p>
  *
  * @author Litarvan
@@ -36,8 +36,7 @@ import java.util.List;
  * @deprecated Use {@link ExternalLaunchProfile} instead, this one isn't compatible with Java 9
  */
 @Deprecated
-public class InternalLaunchProfile
-{
+public class InternalLaunchProfile {
     /**
      * The target class to launch
      */
@@ -68,8 +67,7 @@ public class InternalLaunchProfile
      *
      * @param targetClass The target class to launch
      */
-    public InternalLaunchProfile(String targetClass)
-    {
+    public InternalLaunchProfile(String targetClass) {
         this(targetClass, new String[0]);
     }
 
@@ -79,8 +77,7 @@ public class InternalLaunchProfile
      * @param targetClass The target class
      * @param parameters  The parameters to give to the main method (optional)
      */
-    public InternalLaunchProfile(String targetClass, String[] parameters)
-    {
+    public InternalLaunchProfile(String targetClass, String[] parameters) {
         this(targetClass, "main", new Object[]{parameters}, new Class[]{String[].class});
     }
 
@@ -92,8 +89,7 @@ public class InternalLaunchProfile
      * @param parameters      The parameters to give to the method
      * @param parametersTypes The type of the method parameters
      */
-    public InternalLaunchProfile(String targetClass, String targetMethod, Object[] parameters, Class[] parametersTypes)
-    {
+    public InternalLaunchProfile(String targetClass, String targetMethod, Object[] parameters, Class[] parametersTypes) {
         this.targetClass = targetClass;
         this.targetMethod = targetMethod;
         this.parameters = parameters;
@@ -105,8 +101,7 @@ public class InternalLaunchProfile
      *
      * @return The target class
      */
-    public String getTargetClass()
-    {
+    public String getTargetClass() {
         return targetClass;
     }
 
@@ -115,8 +110,7 @@ public class InternalLaunchProfile
      *
      * @param targetClass The new target class
      */
-    public void setTargetClass(String targetClass)
-    {
+    public void setTargetClass(String targetClass) {
         this.targetClass = targetClass;
     }
 
@@ -125,8 +119,7 @@ public class InternalLaunchProfile
      *
      * @return The target method
      */
-    public String getTargetMethod()
-    {
+    public String getTargetMethod() {
         return targetMethod;
     }
 
@@ -135,8 +128,7 @@ public class InternalLaunchProfile
      *
      * @param targetMethod The new target method
      */
-    public void setTargetMethod(String targetMethod)
-    {
+    public void setTargetMethod(String targetMethod) {
         this.targetMethod = targetMethod;
     }
 
@@ -145,8 +137,7 @@ public class InternalLaunchProfile
      *
      * @return The parameters
      */
-    public Object[] getParameters()
-    {
+    public Object[] getParameters() {
         return parameters;
     }
 
@@ -155,8 +146,7 @@ public class InternalLaunchProfile
      *
      * @param parameters The parameters
      */
-    public void setParameters(Object[] parameters)
-    {
+    public void setParameters(Object[] parameters) {
         this.parameters = parameters;
     }
 
@@ -165,8 +155,7 @@ public class InternalLaunchProfile
      *
      * @return The parameters types
      */
-    public Class[] getParametersTypes()
-    {
+    public Class[] getParametersTypes() {
         return parametersTypes;
     }
 
@@ -175,8 +164,7 @@ public class InternalLaunchProfile
      *
      * @param parametersTypes The parameters types
      */
-    public void setParametersTypes(Class[] parametersTypes)
-    {
+    public void setParametersTypes(Class[] parametersTypes) {
         this.parametersTypes = parametersTypes;
     }
 
@@ -185,8 +173,7 @@ public class InternalLaunchProfile
      *
      * @return The classpath
      */
-    public List<File> getClasspath()
-    {
+    public List<File> getClasspath() {
         return classpath;
     }
 
@@ -195,8 +182,7 @@ public class InternalLaunchProfile
      *
      * @param classpath The classpath
      */
-    public void setClasspath(List<File> classpath)
-    {
+    public void setClasspath(List<File> classpath) {
         this.classpath = classpath;
     }
 }

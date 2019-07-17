@@ -19,6 +19,7 @@
 package fr.nathanael2611.minecraftlauncherjson.launch.util.explorer;
 
 import fr.nathanael2611.minecraftlauncherjson.launch.FailException;
+
 import java.io.File;
 import java.util.ArrayList;
 
@@ -26,31 +27,27 @@ import java.util.ArrayList;
  * The Files Util class
  *
  * <p>
- *     Contains some useful methods about the files.
+ * Contains some useful methods about the files.
  * </p>
  *
  * @author Litarvan
  * @version 3.0.2-BETA
  * @since 3.0.0-BETA
  */
-public class FilesUtil
-{
+public class FilesUtil {
     /**
      * List the sub-files and sub-directory of a given one, recursively
      *
      * @param directory The directory to list
-     *
      * @return The generated list of files
      */
-    public static ArrayList<File> listRecursive(File directory)
-    {
+    public static ArrayList<File> listRecursive(File directory) {
         ArrayList<File> files = new ArrayList<File>();
         File[] fs = directory.listFiles();
         if (fs == null)
             return files;
 
-        for (File f : fs)
-        {
+        for (File f : fs) {
             if (f.isDirectory())
                 files.addAll(listRecursive(f));
 
@@ -66,11 +63,9 @@ public class FilesUtil
      *
      * @param root The root directory where the file is supposed to be
      * @param file The name of the file to get
-     *
      * @return The found file
      */
-    public static File get(File root, String file)
-    {
+    public static File get(File root, String file) {
         File f = new File(root, file);
         if (!f.exists())
             throw new FailException("Given file/directory doesn't exist !");
@@ -82,11 +77,9 @@ public class FilesUtil
      * Return the given directory, but check if it is a directory
      *
      * @param d The directory to check
-     *
      * @return The given directory
      */
-    public static File dir(File d)
-    {
+    public static File dir(File d) {
         if (!d.isDirectory())
             throw new FailException("Given directory is not one !");
 
@@ -98,14 +91,11 @@ public class FilesUtil
      *
      * @param root The directory where the other one is supposed to be
      * @param dir  The name of the directory to get
-     *
      * @return The got directory
-     *
      * @see #get(File, String)
      * @see #dir(File)
      */
-    public static File dir(File root, String dir)
-    {
+    public static File dir(File root, String dir) {
         return dir(get(root, dir));
     }
 
@@ -114,13 +104,10 @@ public class FilesUtil
      * checks if it is a directory, and return an empty file list if listFiles returns null
      *
      * @param dir The directory to list
-     *
      * @return The files in the given directory
-     *
      * @see #dir(File)
      */
-    public static File[] list(File dir)
-    {
+    public static File[] list(File dir) {
         File[] files = dir(dir).listFiles();
 
         return files == null ? new File[0] : files;

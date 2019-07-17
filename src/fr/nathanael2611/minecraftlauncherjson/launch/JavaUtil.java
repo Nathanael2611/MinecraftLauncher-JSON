@@ -24,22 +24,23 @@ import java.lang.reflect.Field;
  * The Java Util
  *
  * <p>
- *     Contains some useful things about the launching
+ * Contains some useful things about the launching
  * </p>
  *
  * @author Litarvan
  * @version 3.0.4
  * @since 3.0.0-BETA
  */
-public class JavaUtil
-{
+public class JavaUtil {
+    private static boolean useCustomJRE = false;
+    private static String custom_java_path = "";
+
     /**
      * Return the special default VM arguments
      *
      * @return The special VM args
      */
-    public static String[] getSpecialArgs()
-    {
+    public static String[] getSpecialArgs() {
         return new String[]{"-XX:-UseAdaptiveSizePolicy", "-XX:+UseConcMarkSweepGC"};
     }
 
@@ -47,11 +48,9 @@ public class JavaUtil
      * Create an argument for the mac dock name
      *
      * @param name The name to set
-     *
      * @return The generated argument
      */
-    public static String macDockName(String name)
-    {
+    public static String macDockName(String name) {
         return "-Xdock:name=" + name;
     }
 
@@ -60,9 +59,8 @@ public class JavaUtil
      *
      * @return The java command
      */
-    public static String getJavaCommand()
-    {
-        if(useCustomJRE){
+    public static String getJavaCommand() {
+        if (useCustomJRE) {
             return custom_java_path;
         }
         if (System.getProperty("os.name").toLowerCase().contains("win"))
@@ -71,9 +69,7 @@ public class JavaUtil
         return System.getProperty("java.home") + "/bin/java";
     }
 
-    private static boolean useCustomJRE = false;
-    private static String custom_java_path = "";
-    public static void setCustomJRE(String path){
+    public static void setCustomJRE(String path) {
         custom_java_path = path;
         useCustomJRE = true;
     }
@@ -84,8 +80,7 @@ public class JavaUtil
      * @param path The new library path
      * @throws Exception If it failed
      */
-    public static void setLibraryPath(String path) throws Exception
-    {
+    public static void setLibraryPath(String path) throws Exception {
         System.setProperty("java.library.path", path);
 
         Field fieldSysPath = ClassLoader.class.getDeclaredField("sys_paths");

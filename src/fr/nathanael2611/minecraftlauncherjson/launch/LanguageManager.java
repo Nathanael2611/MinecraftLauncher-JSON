@@ -25,15 +25,14 @@ import java.util.Locale;
  * The Abstract Option Frame
  *
  * <p>
- *     The base class to use with the Ram Selector to select RAM.
+ * The base class to use with the Ram Selector to select RAM.
  * </p>
  *
  * @author Litarvan
  * @version 3.0.4
  * @since 3.0.0-BETA
  */
-public class LanguageManager
-{
+public class LanguageManager {
     /**
      * The ENGLISH Lang set
      */
@@ -52,8 +51,7 @@ public class LanguageManager
     /**
      * Setup the default languages
      */
-    static
-    {
+    static {
         ENGLISH.put("hi-int", "OpenLauncherLib 3.0.5 by Adrien 'Litarvan' Navratil - Internal Launching System");
         ENGLISH.put("hi-ext", "OpenLauncherLib 3.0.5 by Adrien 'Litarvan' Navratil - External Launching System");
         ENGLISH.put("options", "Options");
@@ -83,9 +81,9 @@ public class LanguageManager
         ENGLISH.put("ent", "Entire command");
         ENGLISH.put("support-forge", "Forge is a free open source library, consider supporting them at http://patreon.com/lexmanos");
         ENGLISH.put("old-tweak", "WARNING: You selected tweaking with a version under or equals as 1.5.2, this isn't fully supported, and could cause bugs.");
-	    ENGLISH.put("forge-optifine", "WARNING: You selected Forge tweak with Optifine/Shader, they are ONLY FOR VANILLA, the game wil probably not start, so for security, Optifine/Shader was/were disabled");
-		ENGLISH.put("tweak-deprec", "WARNING: You selected GameTweaks other than forge with Minecraft 1.13 or greater, the tweaking system has been deleted since, game will probably not start");
-		ENGLISH.put("forge-old", "WARNING: You selected Forge tweaking with a version under or equals as 1.5.2, forge is supposed to be installed in the jar (not with a tweaker), the game MAY NOT START !");
+        ENGLISH.put("forge-optifine", "WARNING: You selected Forge tweak with Optifine/Shader, they are ONLY FOR VANILLA, the game wil probably not start, so for security, Optifine/Shader was/were disabled");
+        ENGLISH.put("tweak-deprec", "WARNING: You selected GameTweaks other than forge with Minecraft 1.13 or greater, the tweaking system has been deleted since, game will probably not start");
+        ENGLISH.put("forge-old", "WARNING: You selected Forge tweaking with a version under or equals as 1.5.2, forge is supposed to be installed in the jar (not with a tweaker), the game MAY NOT START !");
 
         FRENCH.put("hi-int", "OpenLauncherLib 3.0.4 par Adrien 'Litarvan' Navratil - Systeme de lancement interne");
         FRENCH.put("hi-ext", "OpenLauncherLib 3.0.4 par Adrien 'Litarvan' Navratil - Systeme de lancement externe");
@@ -114,27 +112,31 @@ public class LanguageManager
         FRENCH.put("nat", "Chargement des natives");
         FRENCH.put("done", "Termine");
         FRENCH.put("ent", "Commande entiere");
-		FRENCH.put("support-forge", "Forge est une librairie open source, supportez son developpement sur https://patreon.com/lexmanos");
-		FRENCH.put("old-tweak", "ATTENTION: Vous avez choisi d'utiliser le tweaking avec une version inferieure ou egale a la 1.5.2, ce n'est pas vraiment supporte, des bugs peuvent survenir");
-		FRENCH.put("forge-optifine", "ATTENTION: Vous avez selectionne les tweaks Forge avec Optifine/Shader, ces derniers sont SEULEMENT POUR LE VANILLA, le jeu ne demarrera sûrement pas, donc Optifine/Shader ont ete desactives");
-		FRENCH.put("tweak-deprec", "ATTENTION: Vous avez selectione des GameTweaks autre que Forge avec Minecraft 1.13 ou superieur, le systeme de tweaking a ete supprime depuis, le jeu ne demarrera probablement pas");
-		FRENCH.put("forge-old", "ATTENTION: Vous avez selectionne le tweak Forge avec une version inferieure ou egale a la 1.5.2, forge est sense être installe a l'interieur du jar (et non pas via tweaking), le jeu POURAIT NE PAS DEMARRER !");
-	}
+        FRENCH.put("support-forge", "Forge est une librairie open source, supportez son developpement sur https://patreon.com/lexmanos");
+        FRENCH.put("old-tweak", "ATTENTION: Vous avez choisi d'utiliser le tweaking avec une version inferieure ou egale a la 1.5.2, ce n'est pas vraiment supporte, des bugs peuvent survenir");
+        FRENCH.put("forge-optifine", "ATTENTION: Vous avez selectionne les tweaks Forge avec Optifine/Shader, ces derniers sont SEULEMENT POUR LE VANILLA, le jeu ne demarrera sûrement pas, donc Optifine/Shader ont ete desactives");
+        FRENCH.put("tweak-deprec", "ATTENTION: Vous avez selectione des GameTweaks autre que Forge avec Minecraft 1.13 ou superieur, le systeme de tweaking a ete supprime depuis, le jeu ne demarrera probablement pas");
+        FRENCH.put("forge-old", "ATTENTION: Vous avez selectionne le tweak Forge avec une version inferieure ou egale a la 1.5.2, forge est sense être installe a l'interieur du jar (et non pas via tweaking), le jeu POURAIT NE PAS DEMARRER !");
+    }
+
+    // Setting system lang
+    static {
+        if (Locale.getDefault().getLanguage().toLowerCase().startsWith("fr")) {
+            setLang(FRENCH);
+        }
+    }
 
     /**
      * Get a translated string
      *
      * @param keys The key of the string
-     *
      * @return The translated string
      */
-    public static String lang(String... keys)
-    {
+    public static String lang(String... keys) {
         String total = "";
         String text;
 
-        for (String key : keys)
-        {
+        for (String key : keys) {
             text = currentLangSet.get(key);
             if (text == null)
                 text = ENGLISH.get(key);
@@ -150,8 +152,7 @@ public class LanguageManager
      *
      * @param langSet The new language set
      */
-    public static void setLang(HashMap<String, String> langSet)
-    {
+    public static void setLang(HashMap<String, String> langSet) {
         currentLangSet = langSet;
     }
 
@@ -160,17 +161,7 @@ public class LanguageManager
      *
      * @return The current lang set
      */
-    public static HashMap<String, String> getCurrentLangSet()
-    {
+    public static HashMap<String, String> getCurrentLangSet() {
         return currentLangSet;
-    }
-
-    // Setting system lang
-    static
-    {
-        if (Locale.getDefault().getLanguage().toLowerCase().startsWith("fr"))
-        {
-            setLang(FRENCH);
-        }
     }
 }

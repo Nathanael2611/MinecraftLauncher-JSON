@@ -9,7 +9,6 @@ public class LauncherProgressBar extends JComponent {
     int maxLevel;
 
 
-
     public int getLevel() {
         return level;
     }

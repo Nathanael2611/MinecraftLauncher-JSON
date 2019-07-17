@@ -34,13 +34,13 @@ public class Helpers {
             stringBuilder.deleteCharAt(stringBuilder.length() - 1);
             reader.close();
             return stringBuilder.toString();
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return "ERROR";
     }
 
-    public static String readJsonFromUrl(String url) throws IOException, IOException {
+    public static String readJsonFromUrl(String url) throws IOException {
         URL urlObject;
         URLConnection uc;
         StringBuilder parsedContentFromUrl = new StringBuilder();
@@ -61,20 +61,20 @@ public class Helpers {
         return parsedContentFromUrl.toString();
     }
 
-    public static int stringToInteger(String calc){
+    public static int stringToInteger(String calc) {
         ScriptEngineManager mgr = new ScriptEngineManager();
         ScriptEngine engine = mgr.getEngineByName("JavaScript");
-        String code = "eval("+calc+")";
+        String code = "eval(" + calc + ")";
         try {
             return (int) Math.round(Double.valueOf(engine.eval(code).toString()));
         } catch (ScriptException e) {
             e.printStackTrace();
         }
-        System.err.println("Error while eval "+calc+" !!!! Return value will be 0.");
+        System.err.println("Error while eval " + calc + " !!!! Return value will be 0.");
         return 0;
     }
 
-    public static BufferedImage getImageFromLink(String link){
+    public static BufferedImage getImageFromLink(String link) {
         try {
             return ImageIO.read(new URL(link));
         } catch (IOException e) {
@@ -85,9 +85,9 @@ public class Helpers {
     }
 
 
-    public static Color parseColor(String color){
-        if(color.equalsIgnoreCase("notfound"))return Color.BLACK;
-        if(color.equalsIgnoreCase("transparent")){
+    public static Color parseColor(String color) {
+        if (color.equalsIgnoreCase("notfound")) return Color.BLACK;
+        if (color.equalsIgnoreCase("transparent")) {
             return NLib.TRANSPARENT;
         }
         return Color.decode(color);

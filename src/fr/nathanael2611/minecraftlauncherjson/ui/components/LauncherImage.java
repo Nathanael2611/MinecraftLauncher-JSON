@@ -6,7 +6,8 @@ import java.awt.image.BufferedImage;
 
 public class LauncherImage extends JComponent {
     BufferedImage image;
-    public LauncherImage(BufferedImage image){
+
+    public LauncherImage(BufferedImage image) {
         this.image = image;
     }
 

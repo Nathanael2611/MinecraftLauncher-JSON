@@ -27,15 +27,14 @@ import java.util.ArrayList;
  * The Game Infos
  *
  * <p>
- *     The Game Infos like the server name, the version, the tweaks, etc...
+ * The Game Infos like the server name, the version, the tweaks, etc...
  * </p>
  *
  * @author Litarvan
  * @version 3.0.4
  * @since 2.0.0-SNAPSHOT
  */
-public class GameInfos
-{
+public class GameInfos {
     /**
      * The server name
      */
@@ -63,8 +62,7 @@ public class GameInfos
      * @param gameVersion The Game Version containing the launch informations
      * @param tweaks      The current tweaks (Shader, Optifine, Forge, or just Vanilla)
      */
-    public GameInfos(String serverName, GameVersion gameVersion, GameTweak[] tweaks)
-    {
+    public GameInfos(String serverName, GameVersion gameVersion, GameTweak[] tweaks) {
         this(serverName, GameDirGenerator.createGameDir(serverName), gameVersion, tweaks);
     }
 
@@ -76,49 +74,43 @@ public class GameInfos
      * @param gameVersion The Game Version containing the launch informations
      * @param tweaks      The current tweaks (Shader, Optifine, Forge, or just Vanilla)
      */
-    public GameInfos(String serverName, File gameDir, GameVersion gameVersion, GameTweak[] tweaks)
-    {
+    public GameInfos(String serverName, File gameDir, GameVersion gameVersion, GameTweak[] tweaks) {
         this.serverName = serverName;
         this.gameDir = gameDir;
         this.gameVersion = gameVersion;
         this.tweaks = tweaks;
 
-        if (tweaks != null)
-        {
+        if (tweaks != null) {
             boolean forge = false;
             boolean shaderOrOptifine = false;
-			if (gameVersion.getGameType() == GameType.V1_13_HIGHER_FORGE)
-				if (tweaks.length == 1 && tweaks[0] == GameTweak.FORGE)
-					tweaks = new GameTweak[0];
-				else if (tweaks.length != 0)
+            if (gameVersion.getGameType() == GameType.V1_13_HIGHER_FORGE)
+                if (tweaks.length == 1 && tweaks[0] == GameTweak.FORGE)
+                    tweaks = new GameTweak[0];
+                else if (tweaks.length != 0)
 
-            for (GameTweak tweak : tweaks)
-                if (tweak.equals(GameTweak.FORGE))
-                {
-                    if (gameVersion.getGameType() == GameType.V1_5_2_LOWER)
+                    for (GameTweak tweak : tweaks)
+                        if (tweak.equals(GameTweak.FORGE)) {
+                            if (gameVersion.getGameType() == GameType.V1_5_2_LOWER)
 
-                    forge = true;
-                }
-                else if (tweak == GameTweak.OPTIFINE || tweak == GameTweak.SHADER)
-                {
-                    shaderOrOptifine = true;
-                }
+                                forge = true;
+                        } else if (tweak == GameTweak.OPTIFINE || tweak == GameTweak.SHADER) {
+                            shaderOrOptifine = true;
+                        }
 
             if (forge || gameVersion.getGameType() == GameType.V1_13_HIGHER_FORGE)
 
-			if (tweaks.length > 0 && gameVersion.getGameType() == GameType.V1_5_2_LOWER)
+                if (tweaks.length > 0 && gameVersion.getGameType() == GameType.V1_5_2_LOWER)
 
-            if (shaderOrOptifine && forge)
-            {
+                    if (shaderOrOptifine && forge) {
 
-                ArrayList<GameTweak> tweakList = new ArrayList<GameTweak>();
+                        ArrayList<GameTweak> tweakList = new ArrayList<GameTweak>();
 
-                for (GameTweak tweak : tweaks)
-                    if (tweak != GameTweak.OPTIFINE && tweak != GameTweak.SHADER)
-                        tweakList.add(tweak);
+                        for (GameTweak tweak : tweaks)
+                            if (tweak != GameTweak.OPTIFINE && tweak != GameTweak.SHADER)
+                                tweakList.add(tweak);
 
-                this.tweaks = tweakList.toArray(new GameTweak[tweakList.size()]);
-            }
+                        this.tweaks = tweakList.toArray(new GameTweak[tweakList.size()]);
+                    }
         }
     }
 
@@ -127,8 +119,7 @@ public class GameInfos
      *
      * @return The server name
      */
-    public String getServerName()
-    {
+    public String getServerName() {
         return serverName;
     }
 
@@ -137,8 +128,7 @@ public class GameInfos
      *
      * @return The Game Directory
      */
-    public File getGameDir()
-    {
+    public File getGameDir() {
         return this.gameDir;
     }
 
@@ -147,8 +137,7 @@ public class GameInfos
      *
      * @return The Game Version
      */
-    public GameVersion getGameVersion()
-    {
+    public GameVersion getGameVersion() {
         return gameVersion;
     }
 
@@ -157,8 +146,7 @@ public class GameInfos
      *
      * @return The current tweaks
      */
-    public GameTweak[] getGameTweaks()
-    {
+    public GameTweak[] getGameTweaks() {
         return tweaks;
     }
 
@@ -166,11 +154,9 @@ public class GameInfos
      * Check if the game has a given tweak
      *
      * @param tweak The tweak to check if the game has it
-     *
      * @return True if it has, false if not
      */
-    public boolean hasGameTweak(GameTweak tweak)
-    {
+    public boolean hasGameTweak(GameTweak tweak) {
         for (GameTweak gameTweak : tweaks)
             if (gameTweak.equals(tweak))
                 return true;

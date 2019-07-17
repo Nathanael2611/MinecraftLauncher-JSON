@@ -8,9 +8,11 @@ import java.awt.event.MouseEvent;
 public class WindowMover extends MouseAdapter {
     private Point click;
     private JFrame window;
+
     public WindowMover(JFrame window) {
         this.window = window;
     }
+
     @Override
     public void mouseDragged(MouseEvent e) {
         // If the initial click point isn't null (can happen sometimes)

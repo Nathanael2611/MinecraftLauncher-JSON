@@ -11,18 +11,19 @@ public class LauncherColoredButton extends LauncherButton {
     Color colorDisabled;
 
 
+    public LauncherColoredButton(Color color) {
+        this.color = color;
+        this.colorHover = colorHover;
+        this.colorDisabled = colorDisabled;
+    }
 
-    public LauncherColoredButton(Color color){
+    public LauncherColoredButton(Color color, Color colorHover) {
         this.color = color;
         this.colorHover = colorHover;
         this.colorDisabled = colorDisabled;
     }
-    public LauncherColoredButton(Color color, Color colorHover){
-        this.color = color;
-        this.colorHover = colorHover;
-        this.colorDisabled = colorDisabled;
-    }
-    public LauncherColoredButton(Color color, Color colorHover, Color colorDisabled){
+
+    public LauncherColoredButton(Color color, Color colorHover, Color colorDisabled) {
         this.color = color;
         this.colorHover = colorHover;
         this.colorDisabled = colorDisabled;
@@ -30,20 +31,20 @@ public class LauncherColoredButton extends LauncherButton {
 
 
     @Override
-    public void paintComponent(Graphics g){
+    public void paintComponent(Graphics g) {
         //super.paintComponent(g);
         setOpaque(false);
         setBackground(NLib.TRANSPARENT);
         Color buttonColor;
 
-        if(isEnabled()){
-            if(isHover())buttonColor = this.colorHover;
+        if (isEnabled()) {
+            if (isHover()) buttonColor = this.colorHover;
             else buttonColor = this.color;
-        }else buttonColor = this.colorDisabled;
+        } else buttonColor = this.colorDisabled;
 
         NLib.fillColoredRect(g, this, buttonColor);
 
-        if(getText() !=null) {
+        if (getText() != null) {
             g.setColor(Color.black);
             if (getTextColor() != null) g.setColor(getTextColor());
             NLib.drawCenteredString(g, getText(), this.getBounds());
